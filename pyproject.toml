@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "projecteweb-example"
+name = "OtakuSearch"
 version = "0.1.0"
 description = ""
 authors = ["David Sarrat González <113605621+davidsarratgonzalez@users.noreply.github.com>"]
