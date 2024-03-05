@@ -1,3 +1,45 @@
-h1 {
-    color: blue;
+@import url('https://fonts.googleapis.com/css?family=Kaushan Script');
+
+.cos {
+    background-color: #f4effeff;
+}
+
+.frieren {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 7%;
+    top: 16%;
+    
+}
+
+.luffy {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    left: 7%;
+    top: 4%;
+    
+}
+
+
+.titol {
+    text-align: center;
+    font-size: 500%;
+    font-family: 'Kaushan Script';
+}
+
+
+.subtitol {
+    text-align: center;
+    font-style: italic;
+    font-size: 150%;
+}
+
+.capcelera {
+    position: fixed;
+    top: 0%; 
+    left: 0%;
+    right: 0%; 
+    background-color: #ead1dcff; 
 }
