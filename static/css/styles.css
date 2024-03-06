@@ -1,45 +1,62 @@
 @import url('https://fonts.googleapis.com/css?family=Kaushan Script');
 
-.cos {
-    background-color: #f4effeff;
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.frieren {
-    width: 20%;
-    height: 100%;
-    position: absolute;
-    right: 7%;
-    top: 16%;
-    
+header {
+    position: sticky;
+    margin-top: 0;
+    top: 0;
+    background-color: #ead1dcff;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    font-weight: bold;
 }
 
 .luffy {
-    width: 20%;
-    height: 100%;
-    position: absolute;
-    left: 7%;
-    top: 4%;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.luffy img {
+    width: auto;
+    height: 6em;
+}
+
+.container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.page-name {
+    font-size: 4em;
+    font-family: 'Kaushan Script', sans-serif;
 }
 
 
-.titol {
-    text-align: center;
-    font-size: 500%;
-    font-family: 'Kaushan Script';
-}
-
-
-.subtitol {
-    text-align: center;
+.slogan {
+    font-size: 1.2em;
     font-style: italic;
-    font-size: 150%;
 }
 
-.capcelera {
-    position: fixed;
-    top: 0%; 
-    left: 0%;
-    right: 0%; 
-    background-color: #ead1dcff; 
+.frieren {
+    flex: 1;
+}
+
+.frieren img {
+    position: absolute;
+    width: 6rem;
+    height: auto;
+    right: 10%;
+    top: 25.5%;
 }
