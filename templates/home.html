@@ -1,17 +1,45 @@
-{% extends "skeleton.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<form action="{% url 'logout' %}" method="post"> <!-- We can add a form to log out here -->
-  {% csrf_token %}
-  <button type="submit">Log Out</button>
-</form>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> <!-- We can now add a link to the login page here -->
-<a href="{% url 'signup' %}">Sign Up</a> <!-- We can now add a link to the signup page here -->
-{% endif %}
+{% load static %}
+{#{% extends "skeleton.html" %}#}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 {% endblock %}
+<div class="center">
+    <div class="container">
+        <div class="image">
+            <img src="static/imgs/todo.jpg">
+        </div>
+        <div class="form">
+            <span class="page-name">OtakuSearch</span>
+            <span class="slogan">日本行かずにマンガ楽しめる!</span>
+            <div>
+                <span>Login</span>
+            </div>
+            <form>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <div>
+                    <button>Login</button>
+                </div>
+                <div class="sign-up-container">
+                    <span>Don't have an account yet?</span>
+                    <a href="{% url 'signup' %}">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{#{% block title %}Home{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#{% if user.is_authenticated %}#}
+{#Hi {{ user.username }}!#}
+{#<form action="{% url 'logout' %}" method="post"> <!-- We can add a form to log out here -->#}
+{#  {% csrf_token %}#}
+{#  <button type="submit">Log Out</button>#}
+{#</form>#}
+{#{% else %}#}
+{#<p>You are not logged in</p>#}
+{#<a href="{% url 'login' %}">Log In</a> <!-- We can now add a link to the login page here -->#}
+{#<a href="{% url 'signup' %}">Sign Up</a> <!-- We can now add a link to the signup page here -->#}
+{#{% endif %}#}
+{#{% endblock %}#}
