@@ -60,6 +60,7 @@ body {
 .page-name {
     font-size: 2rem;
     font-family: 'Kaushan Script', sans-serif;
+    font-weight: bold;
 }
 
 .slogan {

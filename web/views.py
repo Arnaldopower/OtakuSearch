@@ -5,7 +5,9 @@ from django.contrib.auth import authenticate, login
 
 class MemberView(View):
     def get(self, request):
-        return render(request, 'members.html')
+        if request.user.is_authenticated:
+            return render(request, 'members.html')
+        return redirect('home')
 
 
 class HomeView(View):
