@@ -3,31 +3,13 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 {% endblock %}
-<div class="center">
-    <div class="container">
-        <div class="image">
-            <img src="static/imgs/todo.jpg">
-        </div>
-        <div class="form">
-            <span class="page-name">OtakuSearch</span>
-            <span class="slogan">日本行かずにマンガ楽しめる!</span>
-            <div>
-                <span>Login</span>
-            </div>
-            <form>
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <div>
-                    <button>Login</button>
-                </div>
-                <div class="sign-up-container">
-                    <span>Don't have an account yet?</span>
-                    <a href="{% url 'signup' %}">Sign up</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+{% block content %}
+    {% if not user.is_authenticated %}
+        {% include "registration/login.html" %}
+    {% else %}
+        Hi {{ user.username }}!
+    {% endif %}
+{% endblock %}
 {#{% block title %}Home{% endblock %}#}
 {##}
 {#{% block content %}#}

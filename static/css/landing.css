@@ -1,11 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan Script');
+
+body {
+    background-color: #ead1dc;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
     height: 70%;
-    border: 1px solid black;
-    padding: 2em;
+    border-radius: 20px;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .center {
@@ -16,21 +22,81 @@
     height: 100%;
 }
 
-.image {
+.todo {
     flex: 1;
 }
 
-.image img {
+.todo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 1rem 0 0 1rem;
 }
 
-.form {
-    flex: 1;
+.left-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-flow: column;
+    flex: 1;
+    height: 100%;
+    background-color: white;
 }
 
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.page-info {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-name {
+    font-size: 2rem;
+    font-family: 'Kaushan Script', sans-serif;
+}
+
+.slogan {
+    font-size: 1rem;
+    font-style: italic;
+    border-bottom: 1px solid #ecb7d0;
+}
+
+form input {
+    width: 100%;
+    height: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.34);
+    padding: 0.5rem;
+    border-radius: 0.5em;
+}
+
+.btn-send {
+    color: white;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid #ead1dc;
+    background: rgb(236, 155, 192);
+
+    border-radius: 1em;
+}
+
+.btn-send:hover {
+    cursor: pointer;
+    background: #ecb7d0;
+}
+
+.form-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 2rem;
+    gap: 1rem;
+}

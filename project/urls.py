@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from web.views import HomeView, MemberView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),  # Create a new path for the home page
+    path('members/', MemberView.as_view(), name="members"),
+    path("", HomeView.as_view(), name="home"),  # Create a new path for the home page
     path("accounts/", include("accounts.urls")),  # It is very important to include this BEFORE the built-in authentication URLs
     path("accounts/", include("django.contrib.auth.urls")),  # Add the path for the built-in authentication URLs
 ]
