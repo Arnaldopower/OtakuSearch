@@ -17,14 +17,9 @@
                     <form action="/" method="post">
                         <div class="info-container">
                             {% csrf_token %}
-                            <label>
-                                Username
-                                <input type="text" placeholder="Username" name="username">
-                            </label>
-                            <label>
-                                Password
-                                <input type="password" placeholder="Password" name="password">
-                            </label>
+                            <div class="input-form">
+                                {{ form }}
+                            </div>
                             <button class="btn-send" type="submit">Login</button>
                             <div class="sign-up-container">
                                 <span>Don't have an account yet?</span>

@@ -1,6 +1,8 @@
 {% extends "skeleton.html" %}
-Hi {{ user.username }}!
-<form action="{% url 'logout' %}" method="post"> <!-- We can add a form to log out here -->
-    {% csrf_token %}
-    <button type="submit">Log Out</button>
-</form>
+{% block content %}
+    Hi {{ user.username }}!
+    <form action="{% url 'logout' %}" method="post"> <!-- We can add a form to log out here -->
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
+{% endblock %}
