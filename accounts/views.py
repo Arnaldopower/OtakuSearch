@@ -1,9 +1,49 @@
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.shortcuts import redirect, render
+from django.views import View
+
+from web.forms import LoginForm, SignUpForm
 
 
-class SignUpView(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy("login") # Redirect to the login page after a successful registration
-    template_name = "registration/signup.html" # The template used to render the page
+class LogoutView(View):
+    def post(self, request):
+        logout(request)
+        return redirect('home')
+
+
+class SignUpView(View):
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+        return render(request, 'registration/account.html', {"form": form, "sign_up": True})
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            form = SignUpForm()
+            return render(request, 'registration/account.html', {"form": form, "sign_up": True})
+        return redirect('home')
+
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'registration/account.html', {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+        return render(request, 'registration/account.html', {"form": form})

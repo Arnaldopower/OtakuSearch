@@ -1,0 +1,51 @@
+{% include "base.html" with include_header=False %}
+
+{% load static %}
+
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="center-screen">
+        <div class="container">
+            <div class="side left">
+                <img class="logo" src="{% static 'imgs/1311951.jpg' %}">
+            </div>
+            <div class="side right">
+                <form action="
+                    {% if sign_up %}
+                	    {% url 'signup' %}
+                	{% else %}
+                	    {% url 'login' %}
+                    {% endif %}"
+                      method="post">
+                    {% csrf_token %}
+                    <div class="form-items">
+                        <div class="page-info">
+                            <span class="page-name">OtakuSearch</span>
+                            <span class="slogan">日本行かずにマンガ楽しめる!</span>
+                        </div>
+                        {{ form }}
+                        <button>
+                            {% if sign_up %}
+                                Sign Up
+                            {% else %}
+                                Sign in
+                            {% endif %}
+                        </button>
+                        <div class="sign-up">
+                            {% if sign_up %}
+                                <span>Already have an account?</span>
+                                <a href="{% url 'login' %}">Sign in!</a>
+                            {% else %}
+                                <span>Don't have an account yet?</span>
+                                <a href="{% url 'signup' %}">Sign up!</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
