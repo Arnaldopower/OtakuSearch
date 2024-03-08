@@ -4,7 +4,13 @@ body {
     margin: 0;
     padding: 0;
 }
+html {
+    box-sizing: border-box;
+}
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 header {
     position: sticky;
     margin-top: 0;
@@ -59,4 +65,14 @@ header {
     height: auto;
     right: 10%;
     top: 25.5%;
+}
+
+@media screen and (max-width: 480px) {
+    .luffy, .frieren {
+        display: none;
+    }
+
+    /*.container {*/
+    /*    border-radius: 2rem;*/
+    /*}*/
 }
