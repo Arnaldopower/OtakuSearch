@@ -6,38 +6,29 @@ from django.db import models
 # DON'T FORGET to run `python manage.py makemigrations` and `python manage.py migrate` after changing this file!!!
 
 
+class Manga(models.Model):
+    pass
+
+
 class Author(models.Model):
-    name = models.CharField(max_length=100)
-    birth_date = models.DateField()
-
-    def __str__(self):
-        return self.name
+    pass
 
 
-class Publisher(models.Model):
-    name = models.CharField(max_length=200)
-    founded = models.DateField()
-    city = models.CharField(max_length=60)
-
-    def __str__(self):
-        return self.name
+class Status(models.Model):
+    pass
 
 
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    publication_date = models.DateField()
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    genre = models.CharField(max_length=100)
-    publishers = models.ManyToManyField(Publisher, related_name='books')
+class Adaptations(models.Model):
+    pass
 
-    def __str__(self):
-        return self.title
+class Anime(models.Model):
+    pass
 
+class AnimeSeason(models.Model):
+    pass
 
-class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    review_text = models.TextField()
-    rating = models.IntegerField()
+class Genre(models.Model):
+    pass
 
-    def __str__(self):
-        return f"{self.book.title} - {self.rating}/10"
+class Studio(models.Model):
+    pass
