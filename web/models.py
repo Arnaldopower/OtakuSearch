@@ -18,17 +18,21 @@ class Status(models.Model):
     pass
 
 
-class Adaptations(models.Model):
-    pass
-
 class Anime(models.Model):
     pass
+
+
+class Adaptations(models.Model):
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
+
 
 class AnimeSeason(models.Model):
     pass
 
 class Genre(models.Model):
-    pass
+    id = models.PositiveIntegerField(primary_key=True)
+    genero = models.CharField(max_length=50)
 
 class Studio(models.Model):
     pass
