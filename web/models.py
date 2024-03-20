@@ -15,11 +15,15 @@ class Author(models.Model):
 class Status(models.Model):
     pass
 
-class Adaptations(models.Model):
-    pass
 
 class Anime(models.Model):
     pass
+
+
+class Adaptations(models.Model):
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
+
 
 class AnimeSeason(models.Model):
     id = models.IntegerField()
@@ -29,7 +33,8 @@ class AnimeSeason(models.Model):
     episodes = models.IntegerField()
 
 class Genre(models.Model):
-    pass
+    id = models.PositiveIntegerField(primary_key=True)
+    genero = models.CharField(max_length=50)
 
 class Studio(models.Model):
     id = models.IntegerField()
