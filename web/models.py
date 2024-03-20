@@ -15,14 +15,14 @@ class Author(models.Model):
         return f'{self.name}'
 
 
-class Status(models.Model):  # Oscar
+class Status(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return f'ID: {self.id} Name: {self.name}'
 
 
-class Anime(models.Model):  # Oscar
+class Anime(models.Model):
     id_anime = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=150)
     seasons = models.IntegerField()
