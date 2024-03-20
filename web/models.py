@@ -75,7 +75,7 @@ class Manga(models.Model):
     authors = models.ManyToManyField(Author)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'ID: {self.id} Name: {self.name}'
 
 
 class Adaptations(models.Model):
