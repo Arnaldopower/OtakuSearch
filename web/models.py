@@ -9,14 +9,11 @@ from django.db import models
 class Manga(models.Model):
     pass
 
-
 class Author(models.Model):
     pass
 
-
 class Status(models.Model):
     pass
-
 
 class Adaptations(models.Model):
     pass
@@ -25,10 +22,15 @@ class Anime(models.Model):
     pass
 
 class AnimeSeason(models.Model):
-    pass
+    id = models.IntegerField()
+    animeID = models.ForeignKey(Anime, default = 1, on_delete = models.CASCADE)
+    season = models.IntegerField()
+    name = models.CharField(max_length=150)
+    episodes = models.IntegerField()
 
 class Genre(models.Model):
     pass
 
 class Studio(models.Model):
-    pass
+    id = models.IntegerField()
+    name = models.CharField(max_length=150)
