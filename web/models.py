@@ -28,7 +28,7 @@ class Anime(models.Model):  # Oscar
     seasons = models.IntegerField()
     description = models.CharField(max_length=500)
     cover = models.URLField()
-    rating = models.FloatField(min=0.0, max=1.0)
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -36,7 +36,7 @@ class Anime(models.Model):  # Oscar
 
 
 class AnimeSeason(models.Model):
-    id = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
     animeID = models.ForeignKey(Anime, default=1, on_delete=models.CASCADE)
     season = models.IntegerField()
     name = models.CharField(max_length=150)
@@ -70,12 +70,12 @@ class Manga(models.Model):
     description = models.CharField(max_length=500)
     cover = models.URLField()
     rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    status = models.ForeignKey(Status, on_delete=models.SET_NULL)
+    status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
     genres = models.ManyToManyField(Genre)
     authors = models.ManyToManyField(Author)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'ID: {self.id} Name: {self.name}'
 
 
 class Adaptations(models.Model):
