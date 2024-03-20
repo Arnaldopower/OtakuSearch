@@ -14,32 +14,14 @@ class Author(models.Model):
 class Status(models.Model):
     pass
 
-
-class Adaptations(models.Model):
-    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
-    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
-
-
-class Anime(models.Model):
-    pass
-
-
-class AnimeSeason(models.Model):
-    id = models.IntegerField()
-    animeID = models.ForeignKey(Anime, default = 1, on_delete = models.CASCADE)
-    season = models.IntegerField()
-    name = models.CharField(max_length=150)
-    episodes = models.IntegerField()
-
-
 class Genre(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
     genero = models.CharField(max_length=50)
+    def __str__(self):
+        return f'ID: {self.id} Name: {self.name}'
 
-
-class Studio(models.Model):
-  id = models.IntegerField()
-  name = models.CharField(max_length=150)
+class Anime(models.Model):
+    pass
 
 class Manga(models.Model):
     manga_id = models.IntegerField(primary_key=True)
@@ -54,3 +36,22 @@ class Manga(models.Model):
 
     def __str__(self):
         return f'ID: {self.id} Name: {self.name}'
+
+class Adaptations(models.Model):
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
+
+class AnimeSeason(models.Model):
+    id = models.IntegerField()
+    animeID = models.ForeignKey(Anime, default = 1, on_delete = models.CASCADE)
+    season = models.IntegerField()
+    name = models.CharField(max_length=150)
+    episodes = models.IntegerField()
+
+class Studio(models.Model):
+    id = models.IntegerField()
+    name = models.CharField(max_length=150)
+    def __str__(self):
+        return f'ID: {self.id} Name: {self.name}'
+
+
