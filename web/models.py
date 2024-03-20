@@ -8,17 +8,16 @@ from django.db import models
 class Content(models.Model):
     pass
 
-
 class Author(models.Model):
     pass
-
 
 class Status(models.Model):
     pass
 
 
 class Adaptations(models.Model):
-    pass
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
 
 
 class Anime(models.Model):
@@ -26,16 +25,21 @@ class Anime(models.Model):
 
 
 class AnimeSeason(models.Model):
-    pass
+    id = models.IntegerField()
+    animeID = models.ForeignKey(Anime, default = 1, on_delete = models.CASCADE)
+    season = models.IntegerField()
+    name = models.CharField(max_length=150)
+    episodes = models.IntegerField()
 
 
 class Genre(models.Model):
-    pass
+    id = models.PositiveIntegerField(primary_key=True)
+    genero = models.CharField(max_length=50)
 
 
 class Studio(models.Model):
-    pass
-
+  id = models.IntegerField()
+  name = models.CharField(max_length=150)
 
 class Manga(models.Model):
     manga_id = models.IntegerField(primary_key=True)
