@@ -4,7 +4,7 @@
 [![Poetry Version](https://img.shields.io/badge/poetry-1.8.2%2B-brightgreen)](https://python-poetry.org/)
 [![Tailwind Version](https://img.shields.io/badge/django--tailwind--cli-1.3.1-orange)](https://github.com/oliverandrich/django-tailwind-cli)
 
-[![Demo Website](https://img.shields.io/website?url=https%3A%2F%2Fshields.io%2F&label=Demo)](https://github.com/Arnaldopower/OtakuSearch)
+[![Demo Website](https://img.shields.io/badge/demo-website-gree)](https://otaku.smuks.org/)
 
 Django project to learn how it works.
 
