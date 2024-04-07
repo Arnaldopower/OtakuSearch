@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", HomeView.as_view(), name="home"),  # Create a new path for the home page
     path("accounts/", include("accounts.urls")),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
