@@ -19,6 +19,15 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-    user: postgres
+  tailwind:
+    build:
+      context: "."
+    volumes:
+      - .:/app
+    restart: "unless-stopped"
+    command: "poetry run python manage.py tailwind start"
+    # Without tty, no stdin, and tailwind watcher aborts
+    # https://github.com/tailwindlabs/tailwindcss/issues/5324
+    tty: true
 volumes:
   postgres_data:
