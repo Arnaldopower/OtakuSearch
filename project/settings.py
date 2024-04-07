@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'accounts',  # Add the new app to the list of installed apps
-    'tailwind',
-    'theme',
     'django_browser_reload',
+    "django_tailwind_cli",
 ]
 
 MIDDLEWARE = [
@@ -121,7 +120,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Add this line to include the static folder in the project directory
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -130,5 +128,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"  # Add this line to redirect the user to the home page after logging in
 LOGOUT_REDIRECT_URL = "/"  # Add this line to redirect the user to the home page after logging out
-TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = which("npm")

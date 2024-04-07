@@ -4,7 +4,7 @@ services:
   web:
     build: .
     ports:
-      - "8000:8000"
+      - "80:8000"
     environment:
       - POSTGRES_NAME=${POSTGRES_DB:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
@@ -19,15 +19,11 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-  tailwind:
-    build:
-      context: "."
+  node:
+    image: node:18-alpine
     volumes:
-      - .:/app
-    restart: "unless-stopped"
-    command: "poetry run python manage.py tailwind start"
-    # Without tty, no stdin, and tailwind watcher aborts
-    # https://github.com/tailwindlabs/tailwindcss/issues/5324
-    tty: true
+      - .:/app:ro  # Mount project directory in read-only mode
+    entrypoint: [ "npm", "install" ]
+    command: [ "npm", "run", "watch" ]  # Assuming a "watch" script in package.json
 volumes:
   postgres_data:
