@@ -84,6 +84,7 @@ files = [
 
 [package.dependencies]
 django = ">=3.2.14"
+django-browser-reload = {version = ">=1.12.1,<2.0.0", optional = true, markers = "extra == \"reload\""}
 
 [package.extras]
 reload = ["django-browser-reload (>=1.12.1,<2.0.0)"]
@@ -291,4 +292,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3cfa261844e62704e4c557b8a65079e29ad771cd96d1e0f8ee70b368007d4ac3"
+content-hash = "08dab3082de89c3b480ce45e220ae28ee789995deb98a7546c7a4bac249ca924"
