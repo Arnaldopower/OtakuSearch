@@ -2,9 +2,9 @@
 [![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)](https://www.python.org/downloads/)
 [![Django Version](https://img.shields.io/badge/django-5.0.2-green)](https://www.djangoproject.com/)
 [![Poetry Version](https://img.shields.io/badge/poetry-1.8.2%2B-brightgreen)](https://python-poetry.org/)
-[![Tailwind Version](https://img.shields.io/badge/django--tailwind-3.8.0-orange)](https://github.com/timonweb/django-tailwind)
+[![Tailwind Version](https://img.shields.io/badge/django--tailwind--cli-1.3.1-orange)](https://github.com/oliverandrich/django-tailwind-cli)
 
-[![Demo Website](https://img.shields.io/website?url=https%3A%2F%2Fshields.io%2F&label=Demo)](https://github.com/Arnaldopower/OtakuSearch)
+[![Demo Website](https://img.shields.io/badge/demo-website-gree)](https://otaku.smuks.org/)
 
 Django project to learn how it works.
 
@@ -59,17 +59,12 @@ Django project to learn how it works.
     ```bash
     cd OtakuSearch
     ```
-3. Run in a terminal
+3. Run Django with tailwind-cli
    ```bash
    poetry run python manage.py tailwind start
    ```
 
-4. Run in another terminal
-   ```bash
-   poetry run python manage.py runserver 
-   ```
-   
-5. Access the application at `http://localhost:8000`.
+4. Access the application at `http://localhost:8000`.
 
 ## Contributing
 
