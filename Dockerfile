@@ -9,11 +9,6 @@ ARG NODE_MAJOR=18
 WORKDIR /app
 
 # Install dependencies
-RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.3/tailwindcss-linux-x64
-RUN chmod +x tailwindcss-linux-x64
-RUN mv tailwindcss-linux-x64 tailwindcss
-RUN ./tailwindcss init
-RUN
 RUN pip install poetry
 COPY poetry.lock pyproject.toml /app/
 RUN poetry install --no-dev
@@ -28,5 +23,5 @@ RUN poetry run python manage.py migrate
 # Expose port
 EXPOSE 8000
 # Command to run the server
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["poetry", "run", "python", "manage.py", "tailwind", "runserver", "0.0.0.0:8000"]
 

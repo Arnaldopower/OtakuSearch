@@ -4,7 +4,7 @@ services:
   web:
     build: .
     ports:
-      - "80:8000"
+      - "8000:8000"
     environment:
       - POSTGRES_NAME=${POSTGRES_DB:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
@@ -19,11 +19,5 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-  node:
-    image: node:18-alpine
-    volumes:
-      - .:/app:ro  # Mount project directory in read-only mode
-    entrypoint: [ "npm", "install" ]
-    command: [ "npm", "run", "watch" ]  # Assuming a "watch" script in package.json
 volumes:
   postgres_data:
