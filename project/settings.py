@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'accounts',  # Add the new app to the list of installed apps
+    'django_tailwind_cli',
     'django_browser_reload',
-    "django_tailwind_cli",
 ]
 
 MIDDLEWARE = [

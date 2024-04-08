@@ -59,12 +59,21 @@ Django project to learn how it works.
     ```bash
     cd OtakuSearch
     ```
-3. Run Django with tailwind-cli
+3. Install the project:
+    ```bash
+   poetry install
+   ```
+4. Make migrations:
    ```bash
-   poetry run python manage.py tailwind start
+   poetry run python manage.py makemigrations
+   poetry run python manage.py migrate
+   ```
+5. Run Django with Tailwind:
+   ```bash
+   poetry run python manage.py tailwind runserver
    ```
 
-4. Access the application at `http://localhost:8000`.
+6. Access the application at `http://localhost:8000`.
 
 ## Contributing
 
