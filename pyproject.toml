@@ -10,7 +10,6 @@ readme = "README.md"
 python = "^3.12"
 Django = "^5.0.2"
 pre-commit = "^3.6.2"
-django-tailwind = {extras = ["reload"], version = "^3.8.0"}
 django-browser-reload = "^1.12.1"
 django-tailwind-cli = "^2.10.0"
 
