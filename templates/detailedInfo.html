@@ -1,0 +1,30 @@
+{% include "base.html" with include_header=True %}
+<!DOCTYPE html>
+<head>
+        PROBA N1 DE FICAR IMATGE I REDIRIGIR
+</head>
+
+<body>
+
+    <script>
+        function getAnimeVideo(idAnime) {
+            fetch('https://api.jikan.moe/v4/anime/'+idAnime+'/videos')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la connexio suicidet")
+                    }
+                    return response.json();
+                })
+                .then (data => {
+                    console.log(data["promo"])
+                    console.log(data)
+                })
+                .catch (error => (console.log("Error otra vez, matet: ", error)))
+        }
+        getAnimeVideo(49458)
+    </script>
+
+    <iframe width="420" height="315"
+        src="https://www.youtube.com/embed/Meo3mO98huE?enablejsapi=1&wmode=opaque&autoplay=1">
+    </iframe>
+</body>

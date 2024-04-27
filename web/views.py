@@ -6,4 +6,4 @@ class HomeView(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('accounts/login')
-        return render(request, 'home.html')
+        return render(request, 'detailedInfo.html')
