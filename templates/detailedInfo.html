@@ -11,9 +11,10 @@
     <p id="animeStatus"></p>
     <p id="animeStudio"></p>
     <p id="animeSource"></p>
+    <p id="animeGenre"></p>
 
     <script>
-        let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source
+        let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
 
         function getAnime(idAnime){ 
             fetch('https://api.jikan.moe/v4/anime/'+ idAnime)
@@ -29,13 +30,13 @@
                     title = data["data"]['title']
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
-                    score = data["data"]["score"]
-                    synopsis = data["data"]["synopsis"]
+                    score = data["data"]["score"] ? data["data"]["score"] : "No score for now"
+                    synopsis = data["data"]["synopsis"] 
                     rating = data["data"]["rating"]
                     status = data["data"]["status"]
-                    studio = data["data"]["studios"][0]["name"]
+                    studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
                     source = data["data"]["source"]
-                    
+                    genres = data["data"]["genres"]
 
 
                     renderText(title, document.getElementById('animeTitle'))
@@ -47,12 +48,19 @@
                     renderText(status, document.getElementById('animeStatus'))
                     renderText(studio, document.getElementById('animeStudio'))
                     renderText(source, document.getElementById('animeSource'))
+                    genres.forEach(element => {
+                        renderText(element["name"]+"-", document.getElementById('animeGenre'))
+                    });
                 })
                 .catch (error => (console.log("Error otra vez, matet: ", error)))
         }
 
         function renderVideo(embedUrl, iframe) {
-            iframe.src = embedUrl
+            if (embedUrl){
+                iframe.src = embedUrl
+            } else {
+                iframe.style.display = "none"
+            }
         }
 
         function renderImage(embedImg, img) {
@@ -60,10 +68,10 @@
         }
 
         function renderText(title, p){
-            p.innerText = title
+            p.innerText += title
         }
 
-        getAnime(52701)
+        getAnime(57907)
     </script>
 
 </body>
