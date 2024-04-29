@@ -3,28 +3,20 @@
 
 <body>
     <iframe id="animeVideo" width="420" height="315"></iframe>
-    <img id="animeImage" width="420" height="315"></img>
+    <img id="animeImage" width="380" height="315"></img>
+    <h1 id="animeTitle"></h1>
+    <p id="animeScore"></p>
+    <p id="animeSynopsis"></p>
+    <p id="animeRating"></p>
+    <p id="animeStatus"></p>
+    <p id="animeStudio"></p>
+    <p id="animeSource"></p>
 
     <script>
-        let embedUrl, embedImg
+        let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source
 
-        function getAnimeVideo(idAnime) {
-            fetch('https://api.jikan.moe/v4/anime/'+idAnime+'/videos')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error en la connexio suicidet")
-                    }
-                    return response.json()
-                })
-                .then (data => {
-                    embedUrl = data["data"]['promo'][0]['trailer']['embed_url']
-                    renderVideo(embedUrl, document.getElementById('animeVideo'))
-                })
-                .catch (error => (console.log("Error otra vez, matet: ", error)))
-        }
-
-        function getAnimeImage(idAnime) {
-            fetch('https://api.jikan.moe/v4/anime/'+idAnime+'/pictures')
+        function getAnime(idAnime){ 
+            fetch('https://api.jikan.moe/v4/anime/'+ idAnime)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Error en la connexio suicidet")
@@ -33,8 +25,28 @@
                 })
                 .then (data => {
                     console.log(data)
-                    embedImg = data["data"][0]['jpg']['image_url']
+                    
+                    title = data["data"]['title']
+                    embedImg = data["data"]["images"]["jpg"]["image_url"]
+                    embedUrl = data["data"]["trailer"]["embed_url"]
+                    score = data["data"]["score"]
+                    synopsis = data["data"]["synopsis"]
+                    rating = data["data"]["rating"]
+                    status = data["data"]["status"]
+                    studio = data["data"]["studios"][0]["name"]
+                    source = data["data"]["source"]
+                    
+
+
+                    renderText(title, document.getElementById('animeTitle'))
                     renderImage(embedImg, document.getElementById('animeImage'))
+                    renderVideo(embedUrl, document.getElementById('animeVideo'))
+                    renderText(score, document.getElementById('animeScore'))
+                    renderText(synopsis, document.getElementById('animeSynopsis'))
+                    renderText(rating, document.getElementById('animeRating'))
+                    renderText(status, document.getElementById('animeStatus'))
+                    renderText(studio, document.getElementById('animeStudio'))
+                    renderText(source, document.getElementById('animeSource'))
                 })
                 .catch (error => (console.log("Error otra vez, matet: ", error)))
         }
@@ -47,8 +59,11 @@
             img.src = embedImg
         }
 
-        embedUrl = getAnimeVideo(49458)
-        embedImg = getAnimeImage(49458)
+        function renderText(title, p){
+            p.innerText = title
+        }
+
+        getAnime(52701)
     </script>
 
 </body>
