@@ -12,6 +12,7 @@ Django = "^5.0.2"
 pre-commit = "^3.6.2"
 django-browser-reload = "^1.12.1"
 django-tailwind-cli = "^2.10.0"
+requests = "^2.31.0"
 
 
 [build-system]
