@@ -1,21 +1,27 @@
 {% load static %}
 {% include "base.html" with include_header=True %}
 {% block content %}
-    <div class="p-2 bg-slate-900">
+    <div class="p-2 bg-[#E5E5E5]">
+
         {% for list, animes in anime_list.items %}
             <div class="scroll-container relative">
-                <h1 class="py-3 flex items-center before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:before:border-neutral-600 dark:after:border-neutral-600 font-bold text-white text-xl">{{ list }}</h1>
-                <div class="p-2 flex overflow-auto scrollbar-hide gap-4 snap-x snap-proximity scroll-smooth anime-scroll hide-scroll">
+                <h1 class="py-3 flex items-center before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:before:border-neutral-600 dark:after:border-neutral-600 font-bold text-[#2E4053] text-xl">{{ list }}</h1>
+                <div class="p-2 flex overflow-auto gap-4 snap-x snap-proximity scroll-smooth anime-scroll hide-scroll">
                     {% for anime in animes %}
-                        <a href="{% url 'anime' anime_id=anime.id_anime %}"
-                           class="flex flex-shrink-0 rounded-md ring-2 ring-slate-500 h-[25dvh] shadow-xl overflow-hidden relative snap-center cursor-pointer">
-                            <img class="rounded-t-md object-cover hover:opacity-90" src={{ anime.cover }}>
-                            <div class="absolute fixed p-2 text-sm bottom-0 bg-gray-800/75 w-full h-1/5 place-content-center text-center text-white font-medium">{{ anime.name|truncatechars:35 }}</div>
-                        </a>
+                        <div class="w-full hover:scale-105">
+                            <a href="{% url 'anime' anime_id=anime.id_anime %}">
+                                <div class="bg-cover bg-center h-64 flex flex-col justify-end rounded-md ring-2 ring-[#EE99CC] shadow-lg hover:shadow-xl snap-center cursor-pointer"
+                                     style="background-image: url('{{ anime.cover }}')">
+                                    <div class="bg-[#F5C5CA]/75 h-1/5 w-40 flex items-center p-4">
+                                        <p class="text-white text-center text-sm text-[#454545] font-semibold w-full">{{ anime.name|truncatechars:28 }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     {% endfor %}
                 </div>
                 <button id="scroll-left"
-                        class="absolute left-0.5 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-800">
+                        class="absolute left-0.5 top-1/2 -translate-y-1/2 bg-slate-800 text-white p-2 rounded-full hover:scale-125">
                     <svg class="w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                               d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
@@ -23,7 +29,7 @@
                     </svg>
                 </button>
                 <button id="scroll-right"
-                        class="absolute right-0.5 top-1/2 -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-800">
+                        class="absolute right-0.5 top-1/2 -translate-y-1/2 bg-slate-800 text-white p-2 rounded-full hover:scale-125">
                     <svg class="w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                               d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
