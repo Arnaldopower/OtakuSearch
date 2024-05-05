@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan Script');
+
+.scoreBox {
+    background-color: #ecb7d0;
+    max-width: 75px; 
+    border-radius: 10px;
+    font-size: 35px;
+}
+
+.textTitleScore {
+    font-family: 'Kaushan Script', sans-serif;
+}
+
+.textDetailed {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+.animeInfo {
+    display: flex;
+}
+
+.headerDistance{
+    margin-top: 10px;
+}
+
+.detailsSpace {
+    margin-right: 7px;
+}
+
+.avideo {
+    margin-left: 50px;
+}
+
+.exampleFilter {
+    width: 225px;
+    min-width: 225px;
+    margin-right: 50px;
+}

@@ -1,17 +1,37 @@
+{% load static %}
 {% include "base.html" with include_header=True %}
 <!DOCTYPE html>
-
+<head>
+    <link rel="stylesheet" href="{% static 'css/anime-manga.css' %}">
+</head>
 <body>
-    <iframe id="animeVideo" width="420" height="315"></iframe>
-    <img id="animeImage" width="380" height="315"></img>
-    <h1 id="animeTitle"></h1>
-    <p id="animeScore"></p>
-    <p id="animeSynopsis"></p>
-    <p id="animeRating"></p>
-    <p id="animeStatus"></p>
-    <p id="animeStudio"></p>
-    <p id="animeSource"></p>
-    <p id="animeGenre"></p>
+
+    <div class="animeInfo">
+        <button class="exampleFilter"></button>
+        <div class="headerDistance">
+            <div class="animeInfo">
+                <div class="animeInfo">
+                    <div class="detailsSpace">
+                        <img id="animeImage"></img>
+                    </div>
+                    <div class="details">
+                        <p class="scoreBox textTitleScore" id="animeScore"></p>
+                        <div class="textDetailed">
+                            <p id="animeRating"></p>
+                            <p id="animeStatus"></p>
+                            <p id="animeStudio"></p>
+                            <p id="animeSource"></p>
+                            <p id="animeGenre"></p>
+                        </div>
+                    </div>
+                </div>
+                <iframe id="animeVideo" class="avideo" width="420" height="315"></iframe>
+            </div>
+
+            <h1 id="animeTitle" class="textTitleScore"></h1>
+            <p id="animeSynopsis" class="textDetailed"></p>
+        </div>
+    </div>
 
     <script>
         let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
@@ -44,10 +64,51 @@
                     renderVideo(embedUrl, document.getElementById('animeVideo'))
                     renderText(score, document.getElementById('animeScore'))
                     renderText(synopsis, document.getElementById('animeSynopsis'))
-                    renderText(rating, document.getElementById('animeRating'))
-                    renderText(status, document.getElementById('animeStatus'))
-                    renderText(studio, document.getElementById('animeStudio'))
-                    renderText(source, document.getElementById('animeSource'))
+                    renderText("Rating: " + rating, document.getElementById('animeRating'))
+                    renderText("Status: " + status, document.getElementById('animeStatus'))
+                    renderText("Studio: " + studio, document.getElementById('animeStudio'))
+                    renderText("Source: " + source, document.getElementById('animeSource'))
+                    genres.forEach(element => {
+                        renderText(element["name"]+"-", document.getElementById('animeGenre'))
+                    });
+                })
+                .catch (error => (console.log("Error otra vez, matet: ", error)))
+        }
+
+        function getManga(idManga){ 
+            fetch('https://api.jikan.moe/v4/manga/'+ idManga)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la connexio suicidet")
+                    }
+                    return response.json()
+                })
+                .then (data => {
+                    console.log(data)
+                    
+                    title = data["data"]['title']
+                    embedImg = data["data"]["images"]["jpg"]["image_url"]
+                    embedUrl = null
+                    score = data["data"]["score"] ? data["data"]["score"] : "No score for now"
+                    synopsis = data["data"]["synopsis"] 
+                    rating = data["data"]["authors"]
+                    status = data["data"]["status"]
+                    studio = data["data"]["serializations"].length ? data["data"]["serializations"][0]["name"] : "No serialization for now"
+                    source = data["data"]["chapters"]
+                    genres = data["data"]["genres"]
+
+
+                    renderText(title, document.getElementById('animeTitle'))
+                    renderImage(embedImg, document.getElementById('animeImage'))
+                    renderVideo(embedUrl, document.getElementById('animeVideo'))
+                    renderText(score, document.getElementById('animeScore'))
+                    renderText(synopsis, document.getElementById('animeSynopsis'))
+                    rating.forEach(element => {
+                        renderText(element["name"]+"-", document.getElementById('animeRating'))
+                    });
+                    renderText("Status: " + status, document.getElementById('animeStatus'))
+                    renderText("Serialization: " + studio, document.getElementById('animeStudio'))
+                    renderText("Chapters: " + source, document.getElementById('animeSource'))
                     genres.forEach(element => {
                         renderText(element["name"]+"-", document.getElementById('animeGenre'))
                     });
@@ -71,7 +132,7 @@
             p.innerText += title
         }
 
-        getAnime(813)
+        getManga(4632)
     </script>
 
 </body>
