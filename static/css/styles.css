@@ -12,7 +12,7 @@ html {
     box-sizing: inherit;
 }
 header {
-    position: sticky;
+    position: relative;
     margin-top: 0;
     top: 0;
     background-color: #ead1dc;

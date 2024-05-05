@@ -41,12 +41,11 @@ class Studio(models.Model):
 
 class AnimeManager(models.Manager):
     def top(self):
-        return self.get_queryset().order_by('-rating')
+        return {'Top': self.get_queryset().order_by('-rating')}
 
     def by_genre(self):
         res = {genre.genre: [anime for anime in Anime.objects.all() if genre in anime.genres.all()] for genre in
                Genre.objects.all()}
-        print(res)
         return res
 
 
