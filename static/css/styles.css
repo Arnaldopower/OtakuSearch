@@ -12,7 +12,7 @@ html {
     box-sizing: inherit;
 }
 header {
-    position: sticky;
+    position: relative;
     margin-top: 0;
     top: 0;
     background-color: #ead1dc;
@@ -75,4 +75,14 @@ header {
     /*.container {*/
     /*    border-radius: 2rem;*/
     /*}*/
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

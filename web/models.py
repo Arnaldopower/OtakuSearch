@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models import OuterRef
 
 
 # This is an example of a model in Django so that you can see how you can define your own models :D
@@ -22,30 +23,6 @@ class Status(models.Model):
         return f'ID: {self.id} Name: {self.name}'
 
 
-class Anime(models.Model):
-    id_anime = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=150)
-    seasons = models.IntegerField()
-    description = models.CharField(max_length=500)
-    cover = models.URLField()
-    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'ID: {self.id} Name: {self.name}'
-
-
-class AnimeSeason(models.Model):
-    id = models.IntegerField(primary_key=True)
-    animeID = models.ForeignKey(Anime, default=1, on_delete=models.CASCADE)
-    season = models.IntegerField()
-    name = models.CharField(max_length=150)
-    episodes = models.IntegerField()
-
-    def __str__(self):
-        return f'ID: {self.id} Name: {self.name}'
-
-
 class Genre(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
     genre = models.CharField(max_length=50)
@@ -60,6 +37,40 @@ class Studio(models.Model):
 
     def __str__(self):
         return f'ID: {self.id} Name: {self.name}'
+
+
+class AnimeManager(models.Manager):
+    def top(self):
+        return {'Top': self.get_queryset().order_by('-rating')}
+
+    def by_genre(self):
+        res = {genre.genre: [anime for anime in Anime.objects.all() if genre in anime.genres.all()] for genre in
+               Genre.objects.all()}
+        return res
+
+
+class Anime(models.Model):
+    objects = AnimeManager()
+    id_anime = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=150)
+    seasons = models.IntegerField()
+    description = models.CharField(max_length=500)
+    cover = models.URLField()
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    genres = models.ManyToManyField(Genre)
+    studios = models.ManyToManyField(Studio)
+
+    def __str__(self):
+        return f'ID: {self.id_anime} Name: {self.name}'
+
+
+class AnimeSeason(models.Model):
+    id = models.IntegerField(primary_key=True)
+    animeID = models.ForeignKey(Anime, default=1, on_delete=models.CASCADE)
+    season = models.IntegerField()
+    name = models.CharField(max_length=150)
+    episodes = models.IntegerField()
 
 
 class Manga(models.Model):
