@@ -68,12 +68,16 @@ Django project to learn how it works.
    poetry run python manage.py makemigrations
    poetry run python manage.py migrate
    ```
-5. Run Django with Tailwind:
+5. Populate database:
+    ```bash
+    poetry run python manage.py populate
+    ```
+6. Run Django with Tailwind:
    ```bash
    poetry run python manage.py tailwind runserver
    ```
 
-6. Access the application at `http://localhost:8000`.
+7. Access the application at `http://localhost:8000`.
 
 ## Contributing
 
