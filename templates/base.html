@@ -21,15 +21,18 @@
 <body>
 <header>
     {% if include_header %}
-        <div class="luffy">
-            <img src="/static/imgs/luffy.png" alt>
-        </div>
-        <div class="container">
-            <span class="page-name">OtakuSearch</span>
-            <span class="slogan">日本行かずにマンガ楽しめる!</span>
-        </div>
-        <div class="frieren">
-            <img src="/static/imgs/imagen_2024-03-05_091040361.png" alt>
+        <div class="bg-[#EAD1DC] p-2 flex justify-between w-full items-center">
+            <p class="text-xl page-name">OtakuSearch</p>
+            <div class="flex gap-4 items-center">
+                <input class="rounded-md p-2 text-md font-thin h-7 sm:block hidden" type="text" placeholder="Search...">
+                <div class="rounded-full bg-white h-9 w-9 text-black p-2 ring-2 ring-[#EE99CC] cursor-pointer sm:block hidden">
+                    <img class="object-cover" src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="">
+                </div>
+                <svg class="block h-4 w-4 fill-current sm:hidden block cursor-pointer" xmlns="http://www.w3.org/2000/svg" x="0px"
+                     y="0px" viewBox="0 0 50 50">
+                    <path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 L 0 7.5 z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 L 0 22.5 z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 L 0 37.5 z"></path>
+                </svg>
+            </div>
         </div>
     {% endif %}
     {% block header %}

@@ -2,7 +2,6 @@
 {% include "base.html" with include_header=True %}
 {% block content %}
     <div class="p-2 bg-[#E5E5E5]">
-
         {% for list, animes in anime_list.items %}
             <div class="scroll-container relative">
                 <h1 class="py-3 flex items-center before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:before:border-neutral-600 dark:after:border-neutral-600 font-bold text-[#2E4053] text-xl">{{ list }}</h1>
