@@ -56,7 +56,7 @@ class Anime(models.Model):
     seasons = models.IntegerField()
     description = models.CharField(max_length=500)
     cover = models.URLField()
-    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     genres = models.ManyToManyField(Genre)
     studios = models.ManyToManyField(Studio)

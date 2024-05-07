@@ -21,13 +21,12 @@ function initScrollBehavior(className) {
         const scrollLeftButton = container.querySelector('#scroll-left');
         const scrollRightButton = container.querySelector('#scroll-right');
         const cardWidth = animeContainer.children[0].offsetWidth;
-        // animeContainer.style.overflow = 'hidden';
+
         if (animeContainer.scrollLeft === 0) {
             scrollLeftButton.classList.add('opacity-50', 'cursor-not-allowed');
         } else {
             scrollLeftButton.classList.remove('opacity-50', 'cursor-not-allowed');
         }
-        let lastPosition = 0;
         animeContainer.addEventListener('scroll', () => {
             if (animeContainer.scrollLeft === 0) {
                 scrollLeftButton.classList.add('opacity-50', 'cursor-not-allowed');
@@ -36,10 +35,12 @@ function initScrollBehavior(className) {
             }
         });
         scrollLeftButton.addEventListener('click', () => {
-            animeContainer.scrollLeft -= cardWidth * 2;
+            console.log(screen.width);
+            animeContainer.scrollLeft -= cardWidth * screen.width <= 640 ? 2 : 5;
         });
 
         scrollRightButton.addEventListener('click', () => {
+            console.log(screen.width <= 640 ? 2 : 5)
             animeContainer.scrollLeft += cardWidth * 2;
         });
     });
