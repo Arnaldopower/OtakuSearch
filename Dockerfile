@@ -19,6 +19,7 @@ COPY . /app/
 # Run migrations
 RUN poetry run python manage.py makemigrations
 RUN poetry run python manage.py migrate
+RUN poetry run python manage.py populate
 
 # Expose port
 EXPOSE 8000
