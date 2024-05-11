@@ -1,4 +1,5 @@
 {% load static %}
+{% load tailwind_cli %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,11 +8,14 @@
     <meta charset="utf-8">
     <title>{% block title %}OtakuSearch{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
     {% if include_header %}
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endif %}
     {% block head %}
     {% endblock %}
+    {% tailwind_css %}
+    <script src="{% static 'js/utils.js' %}"></script>
 </head>
 
 <body>

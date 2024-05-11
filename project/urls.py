@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts.views import LogoutView, SignUpView, LoginView
-from web.views import HomeView
+from web.views import HomeView, AnimeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", HomeView.as_view(), name="home"),  # Create a new path for the home page
     path("accounts/", include("accounts.urls")),
+    path("__reload__/", include("django_browser_reload.urls")),
+    path("animes/<int:anime_id>/", AnimeView.as_view(), name="anime"),
 ]
