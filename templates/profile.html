@@ -3,20 +3,22 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <div class="base-div">
-        <h1 id="welcome" class="welcome-user"> Welcome  <b>{{user.username}}</b>!</h1>
-        <div id="buttons">
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Log Out</button>
-            </form>
-            <button onclick="showHiddenButton()">Delete account</button>
-            <br>
-            <div id="delete-account-button" style="display: none;">
-                <button onclick="showHiddenButton()">Not sure</button>
-                <form action="{% url 'delete' %}" method="post" >
+        <div>
+            <h1 id="welcome" class="welcome-user"> Welcome  <b>{{user.username}}</b>!</h1>
+            <div id="buttons">
+                <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit">Yes, Delete account</button>
+                    <button type="submit">Log Out</button>
                 </form>
+                <button onclick="showHiddenButton()">Delete account</button>
+                <br>
+                <div id="delete-account-button" style="display: none;">
+                    <button onclick="showHiddenButton()">Not sure</button>
+                    <form action="{% url 'delete' %}" method="post" >
+                        {% csrf_token %}
+                        <button type="submit">Yes, Delete account</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
