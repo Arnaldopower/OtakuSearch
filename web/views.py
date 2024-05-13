@@ -21,5 +21,7 @@ class AnimeView(View):
     
 class ProfileView(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         user = request.user
         return render(request, 'profile.html', context={'user': user})
