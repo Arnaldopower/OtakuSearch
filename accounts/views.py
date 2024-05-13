@@ -47,3 +47,12 @@ class LoginView(View):
                 login(request, user)
                 return redirect('home')
         return render(request, 'registration/account.html', {"form": form})
+
+class DeleteView(View):
+    def get(self, request):
+        pass
+    
+    def post(self, request):
+        user = request.user
+        user.delete()
+        return redirect('login')

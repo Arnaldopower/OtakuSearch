@@ -2,9 +2,14 @@
 {% include "base.html" with include_header=True %}
 {% block content %}
     <div class="animeInfo">
-        <button class="exampleFilter"></button>
-        <div class="headerDistance">
-            <h1> welcome {{user.username}}</h1>
-        </div>
+        <h1 class="page-name"> welcome {{user.username}}</h1>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+        </form>
+        <form action="{% url 'delete' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Delete Account</button>
+        </form>
     </div>
 {% endblock %}
