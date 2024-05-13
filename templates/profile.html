@@ -1,15 +1,33 @@
 {% load static %}
 {% include "base.html" with include_header=True %}
 {% block content %}
-    <div class="animeInfo">
-        <h1 class="page-name"> welcome {{user.username}}</h1>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Log Out</button>
-        </form>
-        <form action="{% url 'delete' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Delete Account</button>
-        </form>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <div class="base-div">
+        <h1 id="welcome" class="welcome-user"> Welcome  <b>{{user.username}}</b>!</h1>
+        <div id="buttons">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
+            <button onclick="showHiddenButton()">Delete account</button>
+            <br>
+            <div id="delete-account-button" style="display: none;">
+                <button onclick="showHiddenButton()">Not sure</button>
+                <form action="{% url 'delete' %}" method="post" >
+                    {% csrf_token %}
+                    <button type="submit">Yes, Delete account</button>
+                </form>
+            </div>
+        </div>
     </div>
+    <script>
+        function showHiddenButton() {
+            var confirmDeletion = document.getElementById("delete-account-button");
+            if (confirmDeletion.style.display === "none") {
+                confirmDeletion.style.display = "inline-block";
+            } else {
+                confirmDeletion.style.display = "none";
+            }
+        }
+    </script>
 {% endblock %}

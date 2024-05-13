@@ -12,6 +12,7 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
 header {
     position: relative;
     margin-top: 0;
