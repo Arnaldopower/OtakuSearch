@@ -842,6 +842,14 @@ select {
   height: 16rem;
 }
 
+.h-\[924\.7px\] {
+  height: 924.7px;
+}
+
+.min-h-\[924\.7px\] {
+  min-height: 924.7px;
+}
+
 .w-40 {
   width: 10rem;
 }
@@ -950,9 +958,9 @@ select {
   background-color: rgb(244 239 254 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#ffffff\] {
+.bg-\[\#fffff1\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 241 / var(--tw-bg-opacity));
 }
 
 .bg-slate-800 {

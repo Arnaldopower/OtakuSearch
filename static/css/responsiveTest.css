@@ -1,0 +1,69 @@
+.TODO{
+
+}
+
+.ITADORI{
+
+}
+
+.IMAGE {
+
+}
+
+.BUTTOM {
+
+}
+
+.DESCRIPTION {
+
+}
+
+.alignVideo{
+
+}
+
+.VIDEO{
+
+}
+
+@media (max-width: 846px) {
+    .TODO{
+        flex-direction: column;
+        align-items: center;   
+    }
+
+    .BUTTOM{
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 584px) {
+    .alignVideo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .VIDEO {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 350px;
+    }
+}
+
+
+@media (max-width: 1090px) {
+    .ITADORI{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .IMAGE{
+        margin-bottom: 10px;
+    }
+
+    .DESCRIPTION {
+        margin-left: 5px;
+    }
+
+}
