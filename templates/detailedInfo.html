@@ -1,23 +1,21 @@
 {% load static %}
 {% include "base.html" with include_header=True %}
 <!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="{% static 'css/anime-manga.css' %}">
-</head>
+
 <body>
 
-    <div style="background-color: #f4effe;">
-        <div class="animeInfo">
-            <button class="exampleFilter"></button>
-            <div class="headerDistance">
-                <div class="animeInfo">
-                    <div class="animeInfo">
-                        <div class="detailsSpace">
+    <div class="bg-[#f4effe]">
+        <div class="flex">
+            <button class="bg-[#ffffff] w-[225px] min-w-[225px] mr-[50px]"></button>
+            <div class="mt-2.5">
+                <div class="flex">
+                    <div class="flex">
+                        <div class="mr-[7px]">
                             <img id="animeImage"></img>
                         </div>
-                        <div class="details">
-                            <p class="scoreBox textTitleScore" id="animeScore"></p>
-                            <div class="textDetailed">
+                        <div>
+                            <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
+                            <div class="italic text-[1.2em]">
                                 <p id="animeRating"></p>
                                 <p id="animeStatus"></p>
                                 <p id="animeStudio"></p>
@@ -26,11 +24,11 @@
                             </div>
                         </div>
                     </div>
-                    <iframe id="animeVideo" class="avideo" width="420" height="315"></iframe>
+                    <iframe id="animeVideo" class="ml-[50px]" width="420" height="315"></iframe>
                 </div>
 
-                <h1 id="animeTitle" class="textTitleScore" style="font-size: 35px;"></h1>
-                <p id="animeSynopsis" class="textDetailed"></p>
+                <h1 id="animeTitle" class="font-kaushan text-[35px]"></h1>
+                <p id="animeSynopsis" class="italic text-[1.2em]"></p>
             </div>
         </div>
     </div>
@@ -47,8 +45,7 @@
                     return response.json()
                 })
                 .then (data => {
-                    console.log(data)
-                    
+
                     title = data["data"]['title']
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
