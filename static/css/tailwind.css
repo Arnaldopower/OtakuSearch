@@ -909,6 +909,16 @@ select {
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#f4effe\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 239 254 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#F4EFFE\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 239 254 / var(--tw-bg-opacity));
+}
+
 .bg-cover {
   background-size: cover;
 }
