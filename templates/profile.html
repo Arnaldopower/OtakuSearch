@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <div class="relative w-full h-screen pl-8 pt-4 bg-[#f4effe]">
-        <div class="absolute left-48 top-20">
+        <div class="absolute left-48 top-10">
             <h1 class="text-5xl"> Welcome  <b>{{user.username}}</b>!</h1>
             <div class="pt-5 ">
                 <form action="{% url 'logout' %}" method="post">

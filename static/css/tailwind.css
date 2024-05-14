@@ -838,6 +838,14 @@ select {
   left: 1.25rem;
 }
 
+.top-14 {
+  top: 3.5rem;
+}
+
+.top-16 {
+  top: 4rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -1102,6 +1110,10 @@ select {
 
 .pb-1 {
   padding-bottom: 0.25rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-center {
