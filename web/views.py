@@ -49,7 +49,7 @@ class AnimeView(View):
             form = CommentForm()
         comments = get_comment(anime_id)
         return render(request, 'anime.html',
-                        context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
+                      context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
 
 class ProfileView(View):
