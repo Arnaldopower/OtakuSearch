@@ -1,12 +1,15 @@
-.welcome-user {
-    font-size: 3rem;
-}
+
 
 .base-div{
     padding-left: 2rem;
     padding-top: 1rem;
+    position: relative;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
+}
+
+.innie_div {
+    position: absolute;
+    left: 10%;
+    top:5%
 }
