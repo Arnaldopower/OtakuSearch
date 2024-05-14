@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',  # Add the new app to the list of installed apps
     'django_tailwind_cli',
     'django_browser_reload',
+    'behave_django',
 ]
 
 MIDDLEWARE = [
