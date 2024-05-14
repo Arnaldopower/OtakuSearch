@@ -2,9 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 from web.forms import CommentForm
-from web.models import Anime, Comment
+from web.models import Anime, Comment, CommentManager
 
-CommentManager, Comment
 
 
 class HomeView(View):
