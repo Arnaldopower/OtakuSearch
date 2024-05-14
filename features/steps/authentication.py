@@ -35,3 +35,8 @@ def step_impl(context, link_text):
 @then("I'm redirected to the login form")
 def step_impl(context):
     assert context.browser.url.startswith(context.get_url('login'))
+
+
+@then('I should see the "Top" page')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Then I should see the "Top" page')
