@@ -5,7 +5,6 @@ from web.forms import CommentForm
 from web.models import Anime, Comment, CommentManager
 
 
-
 class HomeView(View):
     def get(self, request):
         if not request.user.is_authenticated:
@@ -33,25 +32,24 @@ class AnimeView(View):
         return render(request, 'anime.html',
                       context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
+    def post(self, request, anime_id):
+        anime = Anime.objects.get(id_anime=anime_id)
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+        if request.method == "POST":
+            if request.POST.get('deleteComment'):
+                delete_comment(request.POST.get('deleteComment'))
+                form = CommentForm()
+            else:
+                form = CommentForm(request.POST)
 
-def post(self, request, anime_id):
-    anime = Anime.objects.get(id_anime=anime_id)
-    if not request.user.is_authenticated:
-        return redirect('accounts/login')
-    if request.method == "POST":
-        if request.POST.get('deleteComment'):
-            delete_comment(request.POST.get('deleteComment'))
-            form = CommentForm()
+                if form.is_valid():
+                    Comment.objects.create(anime=anime, author=request.user, body=form.cleaned_data['body'])
         else:
-            form = CommentForm(request.POST)
-
-            if form.is_valid():
-                Comment.objects.create(anime=anime, author=request.user, body=form.cleaned_data['body'])
-    else:
-        form = CommentForm()
-    comments = get_comment(anime_id)
-    return render(request, 'anime.html',
-                  context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
+            form = CommentForm()
+        comments = get_comment(anime_id)
+        return render(request, 'anime.html',
+                      context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
 
 class CommentView(View):
