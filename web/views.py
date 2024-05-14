@@ -18,3 +18,10 @@ class AnimeView(View):
     def get(self, request, anime_id):
         anime = Anime.objects.get(id_anime=anime_id)
         return render(request, 'detailedInfo.html', context={'anime': anime})
+    
+class ProfileView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+        user = request.user
+        return render(request, 'profile.html', context={'user': user})

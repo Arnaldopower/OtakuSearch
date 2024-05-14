@@ -20,26 +20,26 @@
 </head>
 
 <body>
-<header>
-    {% if include_header %}
-        <div class="luffy">
-            <img src="/static/imgs/luffy.png" alt>
-        </div>
-        <div class="container">
-            <span class="page-name">OtakuSearch</span>
-            <span class="slogan">日本行かずにマンガ楽しめる!</span>
-        </div>
-        <div class="frieren">
-            <img src="/static/imgs/imagen_2024-03-05_091040361.png" alt>
-        </div>
-    {% endif %}
-    {% block header %}
-    {% endblock %}
-</header>
-<main>
-    {% block content %}
-    {% endblock %}
-</main>
+    <header>
+        {% if include_header %}
+            <a class="luffy" href="{% url 'home' %}">
+                <img src="/static/imgs/luffy.png" alt>
+            </a>
+            <div class="container">
+                <span class="page-name">OtakuSearch</span>
+                <span class="slogan">日本行かずにマンガ楽しめる!</span>
+            </div>
+            <a class="frieren" href="{% url 'profile' %}">
+                <img src="/static/imgs/imagen_2024-03-05_091040361.png" style="z-index: 10;" alt>
+            </a>
+        {% endif %}
+        {% block header %}
+        {% endblock %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 
 </html>
