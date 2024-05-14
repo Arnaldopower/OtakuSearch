@@ -7,7 +7,6 @@
 <body class="bg-[#f4effe]">
     
     <div class="flex alignSearch">
-        <button class="buttonAdjust bg-[#fffff1] w-[225px] min-w-[225px] mr-[50px] h-[924.7px] min-h-[924.7px]"></button>
         <div class="mt-2.5">
             <div class="flex alignVideo">
                 <div class="flex alignImage">
@@ -140,16 +139,4 @@
     {{form}}
     <input type="submit" value="Submit">
     {% csrf_token %}
-</form >
-{% for comment in comments  %}
-    <h4>
-    {{ comment }}
-    </h4>
-    {% if comment.author == user %}
-        <form action="" method="post">
-            <input type="hidden" name="deleteComment" value="{{ comment.id }}">
-            <button type="submit">Delete</button>
-            {% csrf_token %}
-        </form>
-    {% endif %}
-{% endfor %}
+</form>
