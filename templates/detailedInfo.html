@@ -141,15 +141,3 @@
     <input type="submit" value="Submit">
     {% csrf_token %}
 </form >
-{% for comment in comments  %}
-    <h4>
-    {{ comment }}
-    </h4>
-    {% if comment.author == user %}
-        <form action="" method="post">
-            <input type="hidden" name="deleteComment" value="{{ comment.id }}">
-            <button type="submit">Delete</button>
-            {% csrf_token %}
-        </form>
-    {% endif %}
-{% endfor %}
