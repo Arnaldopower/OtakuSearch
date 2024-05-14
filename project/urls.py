@@ -26,5 +26,5 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("animes/<int:anime_id>/", AnimeView.as_view(), name="anime"),
     path("profile/", ProfileView.as_view(), name="profile"),
-    path("modify/<int:comment_id>", CommentView.as_view(), name="modifyComment"),
+
 ]

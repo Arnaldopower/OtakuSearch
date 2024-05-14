@@ -26,10 +26,9 @@ def delete_comment(comment_id):
 class AnimeView(View):
     def get(self, request, anime_id):
         anime = Anime.objects.get(id_anime=anime_id)
-        return render(request, 'detailedInfo.html', context={'anime': anime})
         comments = get_comment(anime_id)
         form = CommentForm()
-        return render(request, 'anime.html',
+        return render(request, 'detailedInfo.html',
                       context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
     def post(self, request, anime_id):
@@ -48,7 +47,7 @@ class AnimeView(View):
         else:
             form = CommentForm()
         comments = get_comment(anime_id)
-        return render(request, 'anime.html',
+        return render(request, 'detailedInfo.html',
                       context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
 
