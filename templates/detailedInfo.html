@@ -5,24 +5,23 @@
     <link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
 </head>
 <body class="bg-[#f4effe]">
-
-<div class="flex alignSearch">
-    <button class="buttonAdjust bg-[#fffff1] w-[225px] min-w-[225px] mr-[50px] h-[924.7px] min-h-[924.7px]"></button>
-    <div class="mt-2.5">
-        <div class="flex alignVideo">
-            <div class="flex alignImage">
-                <div class="mr-[7px]">
-                    <img class="imageAdjust" id="animeImage"></img>
-                </div>
-                <div class="descriptionAdjust">
-                    <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
-                    <div class="italic text-[1.2em]">
-                        <p id="animeRating"></p>
-                        <p id="animeStatus"></p>
-                        <p id="animeStudio"></p>
-                        <p id="animeSource"></p>
-                        <p id="animeGenre"></p>
-                        <p id="animeEpisodes"></p>
+<div class="flex alignSearch ml-[15px]">
+        <div class="mt-2.5">
+            <div class="flex alignVideo">
+                <div class="flex alignImage">
+                    <div class="mr-[7px]">
+                        <img class="imageAdjust" id="animeImage"></img>
+                    </div>
+                    <div class="descriptionAdjust">
+                        <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
+                        <div class="italic text-[1.2em]">
+                            <p id="animeRating"></p>
+                            <p id="animeStatus"></p>
+                            <p id="animeStudio"></p>
+                            <p id="animeSource"></p>
+                            <p id="animeGenre"></p>
+                            <p id="animeEpisodes"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,6 +138,7 @@
     {% endif %}
 </script>
 </body>
+
 <form action="" method="post">
     {{ form }}
     <input type="submit" value="Submit">
