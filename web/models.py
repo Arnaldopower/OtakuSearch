@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser , User
+from django.contrib.auth.models import AbstractUser, User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import OuterRef
@@ -51,7 +51,7 @@ class AnimeManager(models.Manager):
 
 class Anime(models.Model):
     objects = AnimeManager()
-    id_anime = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=150)
     seasons = models.IntegerField()
     description = models.CharField(max_length=500)
@@ -62,7 +62,7 @@ class Anime(models.Model):
     studios = models.ManyToManyField(Studio)
 
     def __str__(self):
-        return f'ID: {self.id_anime} Name: {self.name}'
+        return f'ID: {self.id} Name: {self.name}'
 
 
 class AnimeSeason(models.Model):
@@ -73,7 +73,18 @@ class AnimeSeason(models.Model):
     episodes = models.IntegerField()
 
 
+class MangaManager(models.Manager):
+    def top(self):
+        return {'Top': self.get_queryset().order_by('-rating')}
+
+    def by_genre(self):
+        res = {genre.genre: [manga for manga in Manga.objects.all() if genre in manga.genres.all()] for genre in
+               Genre.objects.all()}
+        return res
+
+
 class Manga(models.Model):
+    objects = MangaManager()
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=150)
     volumes = models.IntegerField()
@@ -93,6 +104,7 @@ class Adaptations(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
 
+
 class CommentManager(models.Manager):
     def by_anime(self, anime_id):
         anime_comment = Comment.objects.filter(anime_id=anime_id)
@@ -102,10 +114,12 @@ class CommentManager(models.Manager):
 class Comment(models.Model):
     objects = CommentManager()
     id = models.IntegerField(primary_key=True)
-    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, blank=True)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
-    #reply = models.ForeignKey("self", on_delete=models.CASCADE)
+
+    # reply = models.ForeignKey("self", on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.author}:' + '\n' + f'{self.body}'
@@ -122,4 +136,3 @@ class RatingFromUser(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-
