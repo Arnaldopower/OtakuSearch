@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_tailwind_cli',
     'django_browser_reload',
     'behave_django',
+    'behave',
+    'splinter',
 ]
 
 MIDDLEWARE = [
