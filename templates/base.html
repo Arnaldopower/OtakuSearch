@@ -23,7 +23,9 @@
 <header>
     {% if include_header %}
         <div class="bg-[#EAD1DC] p-2 flex justify-between w-full items-center">
-            <p class="text-xl page-name">OtakuSearch</p>
+            <a class="cursor-pointer" href="{% url 'home' %}">
+                <p class="text-xl page-name">OtakuSearch</p>
+            </a>
             <div class="flex gap-4 items-center relative">
                 <input class="rounded-md p-2 text-md font-thin h-7 sm:block hidden" type="text" placeholder="Search...">
                 <a class="cursor-pointer" href="{% url 'profile' %}">
