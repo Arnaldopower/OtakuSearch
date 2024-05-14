@@ -22,6 +22,7 @@
                             <p id="animeStudio"></p>
                             <p id="animeSource"></p>
                             <p id="animeGenre"></p>
+                            <p id="animeEpisodes"></p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                     return response.json()
                 })
                 .then (data => {
-
+                    console.log(data)
                     title = data["data"]['title']
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
@@ -56,7 +57,7 @@
                     studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
                     source = data["data"]["source"]
                     genres = data["data"]["genres"]
-
+                    episodes = data["data"]["episodes"] ? data["data"]["episodes"] : "Not determinied"
 
                     renderText(title, document.getElementById('animeTitle'))
                     renderImage(embedImg, document.getElementById('animeImage'))
@@ -67,6 +68,7 @@
                     renderText("Status: " + status, document.getElementById('animeStatus'))
                     renderText("Studio: " + studio, document.getElementById('animeStudio'))
                     renderText("Source: " + source, document.getElementById('animeSource'))
+                    renderText("Episodes: " + episodes, document.getElementById('animeEpisodes'))
                     genres.forEach(element => {
                         renderText(element["name"]+"-", document.getElementById('animeGenre'))
                     });
