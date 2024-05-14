@@ -1,8 +1,8 @@
-from splinter.browser import Browser
+from splinter import Browser
 
 
 def before_all(context):
-    context.browser = Browser('chrome', headless=True)
+    context.browser = Browser('edge', headless=True)
 
 
 def after_all(context):

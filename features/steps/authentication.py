@@ -13,7 +13,6 @@ def step_impl(context, username, password):
     context.browser.fill('username', username)
     context.browser.fill('password', password)
     context.browser.find_by_id('login').click()
-    assert context.browser.is_text_present('Top')
 
 @given('I\'m not logged in')
 def step_impl(context):

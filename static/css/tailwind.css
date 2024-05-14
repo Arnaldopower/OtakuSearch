@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -211,6 +211,8 @@ textarea {
   /* 1 */
   line-height: inherit;
   /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
   color: inherit;
   /* 1 */
   margin: 0;
@@ -234,9 +236,9 @@ select {
 */
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
   -webkit-appearance: button;
   /* 1 */
   background-color: transparent;
@@ -658,6 +660,10 @@ select {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 ::backdrop {
@@ -708,6 +714,10 @@ select {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 .container {
@@ -808,12 +818,12 @@ select {
   margin-bottom: 0.75rem;
 }
 
-.ml-\[50px\] {
-  margin-left: 50px;
+.ml-\[15px\] {
+  margin-left: 15px;
 }
 
-.mr-\[50px\] {
-  margin-right: 50px;
+.ml-\[50px\] {
+  margin-left: 50px;
 }
 
 .mr-\[7px\] {
@@ -880,16 +890,8 @@ select {
   height: 2.25rem;
 }
 
-.h-\[924\.7px\] {
-  height: 924.7px;
-}
-
 .h-screen {
   height: 100vh;
-}
-
-.min-h-\[924\.7px\] {
-  min-height: 924.7px;
 }
 
 .w-4 {
@@ -908,16 +910,8 @@ select {
   width: 2.25rem;
 }
 
-.w-\[225px\] {
-  width: 225px;
-}
-
 .w-full {
   width: 100%;
-}
-
-.min-w-\[225px\] {
-  min-width: 225px;
 }
 
 .max-w-\[75px\] {
@@ -1049,11 +1043,6 @@ select {
 .bg-\[\#f4effe\] {
   --tw-bg-opacity: 1;
   background-color: rgb(244 239 254 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#fffff1\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 241 / var(--tw-bg-opacity));
 }
 
 .bg-gray-200 {
@@ -1197,11 +1186,6 @@ select {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .text-red-900 {
