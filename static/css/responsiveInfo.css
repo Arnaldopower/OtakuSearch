@@ -1,11 +1,11 @@
 
 @media (max-width: 846px) {
-    .TODO{
+    .alignSearch{
         flex-direction: column;
         align-items: center;   
     }
 
-    .BUTTOM{
+    .buttonAdjust{
         margin-bottom: 20px;
     }
 }
@@ -16,7 +16,7 @@
         align-items: center;
     }
 
-    .VIDEO {
+    .responsiveVideo {
         display: flex;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -26,16 +26,16 @@
 
 
 @media (max-width: 1090px) {
-    .ITADORI{
+    .alignImage{
         flex-direction: column;
         align-items: center;
     }
 
-    .IMAGE{
+    .imageAdjust{
         margin-bottom: 10px;
     }
 
-    .DESCRIPTION {
+    .descriptionAdjust {
         margin-left: 5px;
     }
 

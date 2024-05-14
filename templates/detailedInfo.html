@@ -2,19 +2,19 @@
 {% include "base.html" with include_header=True %}
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="{% static 'css/responsiveTest.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
 </head>
 <body class="bg-[#f4effe]">
     
-    <div class="flex TODO">
-        <button class="BUTTOM bg-[#fffff1] w-[225px] min-w-[225px] mr-[50px] h-[924.7px] min-h-[924.7px]"></button>
+    <div class="flex alignSearch">
+        <button class="buttonAdjust bg-[#fffff1] w-[225px] min-w-[225px] mr-[50px] h-[924.7px] min-h-[924.7px]"></button>
         <div class="mt-2.5">
             <div class="flex alignVideo">
-                <div class="flex ITADORI">
+                <div class="flex alignImage">
                     <div class="mr-[7px]">
-                        <img class="IMAGE" id="animeImage"></img>
+                        <img class="imageAdjust" id="animeImage"></img>
                     </div>
-                    <div class="DESCRIPTION">
+                    <div class="descriptionAdjust">
                         <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
                         <div class="italic text-[1.2em]">
                             <p id="animeRating"></p>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <iframe id="animeVideo" class="VIDEO ml-[50px]" width="420" height="315"></iframe>
+                <iframe id="animeVideo" class="responsiveVideo ml-[50px]" width="420" height="315"></iframe>
             </div>
 
             <h1 id="animeTitle" class="font-kaushan text-[35px]"></h1>
