@@ -42,7 +42,7 @@ class EntryView(View):
         comments = get_comment(entry_id)
         form = CommentForm()
         return render(request, 'detailedInfo.html',
-                      context={'entry': entry, 'type': entry_type, 'comments': comments, 'form': form,
+                      context={'entry': entry, 'entry_type': entry_type, 'comments': comments, 'form': form,
                                'user': request.user})
 
     def post(self, request, entry_type, entry_id):
