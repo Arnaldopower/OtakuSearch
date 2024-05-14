@@ -66,7 +66,7 @@ Django project to learn how it works.
 4. Make migrations:
    ```bash
    poetry run python manage.py makemigrations
-   poetry run python manage.py migrate
+   poetry run python manage.py migrate --run-syncdb 
    ```
 5. Populate database:
     ```bash

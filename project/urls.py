@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from web.views import HomeView, AnimeView, ProfileView
+from web.views import HomeView, AnimeView, ProfileView, CommentView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path("animes/<int:anime_id>/", AnimeView.as_view(), name="anime"),
-    path("profile/", ProfileView.as_view(), name="profile")
+    path("profile/", ProfileView.as_view(), name="profile"),
+
 ]

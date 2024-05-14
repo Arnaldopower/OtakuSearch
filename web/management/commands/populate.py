@@ -9,8 +9,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         handler = APIHandler()
-        for page in range(1, 10):
-            top_res = handler.make_request(f'top/anime?page={page}')['data']
+        for page in range(1, 5):
+            top_res = handler.make_request(f'top/anime?page={page}')
+            if not top_res:
+                continue
+            top_res = top_res['data']
             for res in top_res:
                 if not Status.objects.filter(name=res['status']).exists():
                     status = Status(name=res['status'])
