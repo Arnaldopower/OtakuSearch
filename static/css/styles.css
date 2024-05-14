@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Kaushan Script');
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
 
 body {
     margin: 0;
@@ -11,6 +12,7 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
 header {
     position: relative;
     margin-top: 0;
@@ -53,6 +55,7 @@ header {
 .slogan {
     font-size: 1.2em;
     font-style: italic;
+    font-family: 'Sawarabi Mincho', sans-serif;
 }
 
 .frieren {

@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 from web.forms import CommentForm
@@ -27,6 +26,7 @@ def delete_comment(comment_id):
 class AnimeView(View):
     def get(self, request, anime_id):
         anime = Anime.objects.get(id_anime=anime_id)
+        return render(request, 'detailedInfo.html', context={'anime': anime})
         comments = get_comment(anime_id)
         form = CommentForm()
         return render(request, 'anime.html',
@@ -49,8 +49,15 @@ class AnimeView(View):
             form = CommentForm()
         comments = get_comment(anime_id)
         return render(request, 'anime.html',
-                      context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
+                        context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
 
+
+class ProfileView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+        user = request.user
+        return render(request, 'profile.html', context={'user': user})
 
 class CommentView(View):
     def get(self, request, comment_id):

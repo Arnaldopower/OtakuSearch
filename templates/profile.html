@@ -1,0 +1,38 @@
+{% load static %}
+{% include "base.html" with include_header=True %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <div class="relative w-full h-screen pl-8 pt-4 bg-[#f4effe]">
+        <div class="absolute left-48 top-14">
+            <h1 class="text-5xl"> Welcome  <b>{{user.username}}</b>!</h1>
+            <div class="pt-5 ">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="border-2 pl-2 pr-2 mb-3 mt-10 border-gray-400">Log Out</button>
+                </form>
+                <button id="delete-account-button" class="border-2 pl-2 pr-2 border-gray-400" onclick="showHiddenButton()" style="display: inline-block;">Delete account</button>
+                <div id="confirm-delete-account-button" class="top-10 space-y-1 space-x-5 bg-gray-200 p-5 pt-3 pb-3 border-2 border-red-400 mt-5" style="display: none;">
+                    <p class="pb-1">Are you sure you want to delete your account?</p>
+                    <button onclick="showHiddenButton()" class="border-2 pl-2 pr-2 border-red-400">Not sure</button>
+                    <form action="{% url 'delete' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="border-2 pl-2 pr-2 border-red-400">Yes, Delete my account <b class="text-red-900">FOREVER</b></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showHiddenButton() {
+            var confirmDeletion = document.getElementById("confirm-delete-account-button");
+            var deletion = document.getElementById("delete-account-button");
+            if (confirmDeletion.style.display === "none") {
+                confirmDeletion.style.display = "inline-block";
+                deletion.style.display = "none";    
+            } else {
+                confirmDeletion.style.display = "none";
+                deletion.style.display = "inline-block";
+            }
+        }
+    </script>
+{% endblock %}

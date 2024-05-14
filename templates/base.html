@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}OtakuSearch{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="/static/imgs/o.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
     {% if include_header %}
@@ -19,26 +20,26 @@
 </head>
 
 <body>
-<header>
-    {% if include_header %}
-        <div class="luffy">
-            <img src="/static/imgs/luffy.png" alt>
-        </div>
-        <div class="container">
-            <span class="page-name">OtakuSearch</span>
-            <span class="slogan">日本行かずにマンガ楽しめる!</span>
-        </div>
-        <div class="frieren">
-            <img src="/static/imgs/imagen_2024-03-05_091040361.png" alt>
-        </div>
-    {% endif %}
-    {% block header %}
-    {% endblock %}
-</header>
-<main>
-    {% block content %}
-    {% endblock %}
-</main>
+    <header>
+        {% if include_header %}
+            <a class="luffy" href="{% url 'home' %}">
+                <img src="/static/imgs/luffy.png" alt>
+            </a>
+            <div class="container">
+                <span class="page-name">OtakuSearch</span>
+                <span class="slogan">日本行かずにマンガ楽しめる!</span>
+            </div>
+            <a class="frieren" href="{% url 'profile' %}">
+                <img src="/static/imgs/imagen_2024-03-05_091040361.png" style="z-index: 10;" alt>
+            </a>
+        {% endif %}
+        {% block header %}
+        {% endblock %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 
 </html>

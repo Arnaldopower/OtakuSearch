@@ -1,0 +1,42 @@
+
+@media (max-width: 846px) {
+    .alignSearch{
+        flex-direction: column;
+        align-items: center;   
+    }
+
+    .buttonAdjust{
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 584px) {
+    .alignVideo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .responsiveVideo {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 350px;
+    }
+}
+
+
+@media (max-width: 1090px) {
+    .alignImage{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imageAdjust{
+        margin-bottom: 10px;
+    }
+
+    .descriptionAdjust {
+        margin-left: 5px;
+    }
+
+}
