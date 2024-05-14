@@ -814,13 +814,12 @@ select {
   z-index: 50;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mb-3 {
   margin-bottom: 0.75rem;
+}
+
+.ml-\[15px\] {
+  margin-left: 15px;
 }
 
 .ml-\[50px\] {
@@ -845,10 +844,6 @@ select {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.ml-\[15px\] {
-  margin-left: 15px;
 }
 
 .block {
