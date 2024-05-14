@@ -35,6 +35,9 @@ const getTemplateFiles = () => {
 module.exports = {
   content: [].concat(getTemplateFiles()),
   theme: {
+    fontFamily: {
+      'kaushan': ['Kaushan Script', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [
