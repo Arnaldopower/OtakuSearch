@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .models import CommentAnime
+from .models import CommentAnime, RatingFromUser
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -34,11 +34,7 @@ class CommentForm(forms.ModelForm):
         fields = ['body']
 
 
-class RatingAnime:
-    pass
-
-
 class RatingForm(forms.ModelForm):
     class Meta:
-        model = RatingAnime
+        model = RatingFromUser
         fields = ['rating']

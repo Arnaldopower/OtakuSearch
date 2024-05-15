@@ -26,7 +26,7 @@ def get_comment(entry_id, entry_type):
     if entry_type == 'anime':
         return CommentAnime.objects.by_anime(entry_id)
     else:
-        return CommentManga.objects.by_manga(entry_type)
+        return CommentManga.objects.by_manga(entry_id)
 
 
 def delete_comment(comment_id, entry_type):
