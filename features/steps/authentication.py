@@ -17,6 +17,10 @@ def step_impl(context, username, password):
 @given('Im not logged in')
 def step_impl(context):
     context.browser.visit(context.get_url('/accounts/login'))
+    
+@given('Im going to register but i remember my user and password')
+def step_imp(context):
+    
 
 @given('I register as user "{username}" with password "{password}"')
 def step_impl(context, username, password):
