@@ -13,7 +13,9 @@ pre-commit = "^3.6.2"
 django-browser-reload = "^1.12.1"
 django-tailwind-cli = "^2.10.0"
 requests = "^2.31.0"
-behave-django = "^1.4.0"
+django-behave = "^0.1.6"
+behave = "^1.2.6"
+splinter = "^0.21.0"
 
 
 [build-system]

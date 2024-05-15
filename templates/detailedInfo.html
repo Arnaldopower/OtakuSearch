@@ -5,24 +5,23 @@
     <link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
 </head>
 <body class="bg-[#f4effe]">
-    
-    <div class="flex alignSearch">
-        <button class="buttonAdjust bg-[#fffff1] w-[225px] min-w-[225px] mr-[50px] h-[924.7px] min-h-[924.7px]"></button>
-        <div class="mt-2.5">
-            <div class="flex alignVideo">
-                <div class="flex alignImage">
-                    <div class="mr-[7px]">
-                        <img class="imageAdjust" id="animeImage"></img>
-                    </div>
-                    <div class="descriptionAdjust">
-                        <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
-                        <div class="italic text-[1.2em]">
-                            <p id="animeRating"></p>
-                            <p id="animeStatus"></p>
-                            <p id="animeStudio"></p>
-                            <p id="animeSource"></p>
-                            <p id="animeGenre"></p>
-                            <p id="animeEpisodes"></p>
+    <div class="alignSearch ml-[15px]">
+            <div class="flex mt-2.5 alignSearch">
+                <div class="flex alignVideo">
+                    <div class="flex alignImage">
+                        <div class="mr-[7px]">
+                            <img class="imageAdjust" id="animeImage"></img>
+                        </div>
+                        <div class="descriptionAdjust">
+                            <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
+                            <div class="italic text-[1.2em]">
+                                <p id="animeRating"></p>
+                                <p id="animeStatus"></p>
+                                <p id="animeStudio"></p>
+                                <p id="animeSource"></p>
+                                <p id="animeGenre"></p>
+                                <p id="animeEpisodes"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,21 +36,21 @@
     <script>
         let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
 
-        function getAnime(idAnime){ 
-            fetch('https://api.jikan.moe/v4/anime/'+ idAnime)
+        function getAnime(idAnime) {
+            fetch('https://api.jikan.moe/v4/anime/' + idAnime)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Error connecting")
                     }
                     return response.json()
                 })
-                .then (data => {
+                .then(data => {
                     console.log(data)
                     title = data["data"]['title']
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
                     score = data["data"]["score"] ? data["data"]["score"] : "No score for now"
-                    synopsis = data["data"]["synopsis"] 
+                    synopsis = data["data"]["synopsis"]
                     rating = data["data"]["rating"]
                     status = data["data"]["status"]
                     studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
@@ -70,28 +69,28 @@
                     renderText("Source: " + source, document.getElementById('animeSource'))
                     renderText("Episodes: " + episodes, document.getElementById('animeEpisodes'))
                     genres.forEach(element => {
-                        renderText(element["name"]+"-", document.getElementById('animeGenre'))
+                        renderText(element["name"] + "-", document.getElementById('animeGenre'))
                     });
                 })
-                .catch (error => (console.log("Error obtaining elements", error)))
+                .catch(error => (console.log("Error obtaining elements", error)))
         }
 
-        function getManga(idManga){ 
-            fetch('https://api.jikan.moe/v4/manga/'+ idManga)
+        function getManga(idManga) {
+            fetch('https://api.jikan.moe/v4/manga/' + idManga)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Error connecting")
                     }
                     return response.json()
                 })
-                .then (data => {
+                .then(data => {
                     console.log(data)
-                    
+
                     title = data["data"]['title']
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = null
                     score = data["data"]["score"] ? data["data"]["score"] : "No score for now"
-                    synopsis = data["data"]["synopsis"] 
+                    synopsis = data["data"]["synopsis"]
                     rating = data["data"]["authors"]
                     status = data["data"]["status"]
                     studio = data["data"]["serializations"].length ? data["data"]["serializations"][0]["name"] : "No serialization for now"
@@ -105,21 +104,21 @@
                     renderText(score, document.getElementById('animeScore'))
                     renderText(synopsis, document.getElementById('animeSynopsis'))
                     rating.forEach(element => {
-                        renderText(element["name"]+"-", document.getElementById('animeRating'))
+                        renderText(element["name"] + "-", document.getElementById('animeRating'))
                     });
                     renderText("Status: " + status, document.getElementById('animeStatus'))
                     renderText("Serialization: " + studio, document.getElementById('animeStudio'))
                     renderText("Chapters: " + source, document.getElementById('animeSource'))
                     genres.forEach(element => {
-                        renderText(element["name"]+"-", document.getElementById('animeGenre'))
+                        renderText(element["name"] + "-", document.getElementById('animeGenre'))
                     });
                 })
-                .catch (error => (console.log("Error obtaining elements", error)))
+                .catch(error => (console.log("Error obtaining elements", error)))
         }
 
         function renderVideo(embedUrl, iframe) {
-            if (embedUrl){
-                iframe.src = embedUrl
+            if (embedUrl) {
+                iframe.src = embedUrl + '?autoplay=0';
             } else {
                 iframe.style.display = "none"
             }
@@ -129,9 +128,14 @@
             img.src = embedImg
         }
 
-        function renderText(title, p){
+        function renderText(title, p) {
             p.innerText += title
         }
+        {% if entry_type == 'anime' %}
+            getAnime('{{entry.id}}')
+        {% else %}
+            getManga('{{ entry.id }}')
+        {% endif %}
         function editFunction(){
             let formEdit = document.getElementById({{ comment_id }})
             if (formEdit.style.display === "none") {
@@ -139,19 +143,20 @@
                 } else {
                     formEdit.style.display = "none";
             }
-            
+
         }
         getAnime('{{anime.id_anime}}')
     </script>
 </body>
+
 <form action="" method="post">
-    {{form}}
+    {{ form }}
     <input type="submit" value="Submit">
     {% csrf_token %}
-</form >
-{% for comment in comments  %}
+</form>
+{% for comment in comments %}
     <h4>
-    {{ comment }}
+        {{ comment }}
     </h4>
     {% if comment.author == user %}
         <form action="" method="post">
