@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from web.views import HomeView, AnimeView, ProfileView, CommentView
+from web.views import HomeView, AnimeView, ProfileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

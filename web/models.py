@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser , User
+from django.contrib.auth.models import AbstractUser, User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import OuterRef
@@ -93,6 +93,7 @@ class Adaptations(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
 
+
 class CommentManager(models.Manager):
     def by_anime(self, anime_id):
         anime_comment = Comment.objects.filter(anime_id=anime_id)
@@ -105,10 +106,17 @@ class Comment(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
-    #reply = models.ForeignKey("self", on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.author}:' + '\n' + f'{self.body}'
+
+
+class ReplyComment(models.Model):
+    id = models.IntegerField(primary_key=True)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    reply = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
 
 class RatingManager(models.Manager):
@@ -122,4 +130,3 @@ class RatingFromUser(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-
