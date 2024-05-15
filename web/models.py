@@ -105,29 +105,46 @@ class Adaptations(models.Model):
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
 
 
-class CommentManager(models.Manager):
+class CommentManagerAnime(models.Manager):
     def by_anime(self, anime_id):
-        anime_comment = Comment.objects.filter(anime_id=anime_id)
+        anime_comment = CommentAnime.objects.filter(anime_id=anime_id)
         return anime_comment
 
 
-class Comment(models.Model):
-    objects = CommentManager()
-    id = models.IntegerField(primary_key=True)
-    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, blank=True)
-    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
-    def __str__(self):
-        return f'{self.author}:' + '\n' + f'{self.body}'
+class CommentManagerManga(models.Manager):
+    def by_anime(self, anime_id):
+        anime_comment = CommentAnime.objects.filter(anime_id=anime_id)
+        return anime_comment
 
 
-class ReplyComment(models.Model):
+class CommentAnime(models.Model):
+    objects = CommentManagerAnime()
     id = models.IntegerField(primary_key=True)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
-    reply = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.author}:' + '\n' + f'{self.body}'
+
+
+class CommentManga(models.Model):
+    objects = CommentManagerManga()
+    id = models.IntegerField(primary_key=True)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+
+    def __str__(self):
+        return f'{self.author}:' + '\n' + f'{self.body}'
+
+
+class ReplyCommentAnime(models.Model):
+    id = models.IntegerField(primary_key=True)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    reply = models.ForeignKey(CommentAnime, on_delete=models.CASCADE)
 
 
 class RatingManager(models.Manager):

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
 from web.forms import CommentForm
-from web.models import Anime, Comment, CommentManager, Manga
+from web.models import Anime, Manga, CommentAnime, CommentManga
 
 
 class HomeView(View):
@@ -22,18 +22,30 @@ class HomeView(View):
         return render(request, 'home.html', context={'entry_list': entry_list, 'type': req_type})
 
 
-def get_comment(anime_id):
-    comments = Comment.objects.by_anime(anime_id)
-    return comments
+def get_comment(entry_id, entry_type):
+    if entry_type == 'anime':
+        return CommentAnime.objects.by_anime(entry_id)
+    else:
+        return CommentManga.objects.by_manga(entry_type)
 
 
-def delete_comment(comment_id):
-    Comment.objects.get(id=comment_id).delete()
+def delete_comment(comment_id, entry_type):
+    if entry_type == 'anime':
+        CommentAnime.objects.get(id=comment_id).delete()
+    else:
+        CommentManga.objects.get(id=comment_id).delete()
 
-def edit_comment(comment_id, new_body):
-    comment = Comment.objects.get(id=comment_id)
-    comment.body = new_body
-    comment.save()
+
+def edit_comment(comment_id, new_body, entry_type):
+    if entry_type == 'anime':
+        comment_anime = CommentAnime.objects.get(id=comment_id)
+        comment_anime.body = new_body
+        comment_anime.save()
+    else:
+        comment_manga = CommentManga.objects.get(id=comment_id)
+        comment_manga.body = new_body
+        comment_manga.save()
+
 
 @method_decorator(login_required, name='dispatch')
 class EntryView(View):
@@ -43,7 +55,7 @@ class EntryView(View):
             entry = Anime.objects.get(id=entry_id)
         else:
             entry = Manga.objects.get(id=entry_id)
-        comments = get_comment(entry_id)
+        comments = get_comment(entry_id,entry_type)
         form = CommentForm()
         form_edit_comment = CommentForm()
         return render(request, 'detailedInfo.html',
@@ -57,24 +69,25 @@ class EntryView(View):
             entry = Manga.objects.get(id=entry_id)
         if request.method == "POST":
             if request.POST.get('deleteComment'):
-                delete_comment(request.POST.get('deleteComment'))
+                delete_comment(request.POST.get('deleteComment'), entry_type)
             elif request.POST.get('modifyComment'):
                 form_edit_comment = CommentForm(request.POST)
                 if form_edit_comment.is_valid():
-                    edit_comment(request.POST.get('modifyComment'), form_edit_comment.cleaned_data['body'])
+                    edit_comment(request.POST.get('modifyComment'), form_edit_comment.cleaned_data['body'], entry_type)
             else:
                 form = CommentForm(request.POST)
                 if form.is_valid():
                     if entry_type == 'anime':
-                        Comment.objects.create(anime=entry, author=request.user, body=form.cleaned_data['body'])
+                        CommentAnime.objects.create(anime=entry,author=request.user, body=form.cleaned_data['body'])
                     else:
-                        Comment.objects.create(manga=entry, author=request.user, body=form.cleaned_data['body'])
+                        CommentManga.objects.create(manga=entry, author=request.user, body=form.cleaned_data['body'])
 
-        comments = get_comment(entry.id)
+        comments = get_comment(entry.id, entry_type)
         form_edit_comment = CommentForm()
         form = CommentForm()
         return render(request, 'detailedInfo.html',
-                      context={'entry': entry,'entry_type': entry_type, 'comments': comments, 'form': form, 'user': request.user,
+                      context={'entry': entry, 'entry_type': entry_type, 'comments': comments, 'form': form,
+                               'user': request.user,
                                'form_edit_comment': form_edit_comment})
 
 
@@ -101,7 +114,7 @@ class CommentView(View):
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():
-                modify_comment = Comment.objects.get(id=comment_id)
+                modify_comment = CommentAnime.objects.get(id=comment_id)
                 modify_comment.body = form.cleaned_data['body']
                 anime_id = modify_comment.anime.id_anime
                 return redirect(f'anime/{anime_id}')
