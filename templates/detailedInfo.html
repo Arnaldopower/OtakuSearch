@@ -136,6 +136,16 @@
         {% else %}
             getManga('{{ entry.id }}')
         {% endif %}
+        function editFunction(){
+            let formEdit = document.getElementById({{ comment_id }})
+            if (formEdit.style.display === "none") {
+                formEdit.style.display = "block";
+                } else {
+                    formEdit.style.display = "none";
+            }
+
+        }
+        getAnime('{{anime.id_anime}}')
     </script>
 </body>
 
@@ -154,5 +164,14 @@
             <button type="submit">Delete</button>
             {% csrf_token %}
         </form>
+        <button onclick="editFunction()">edit</button>
+            <div id="{{comment_id}}">
+                <form action="" method="post">
+                    <input type="hidden" name="modifyComment" value="{{ comment.id }}">
+                    {{form_edit_comment}}
+                    <input type="submit" value="Submit edit">
+                    {% csrf_token %}
+                </form>
+            </div>
     {% endif %}
 {% endfor %}
