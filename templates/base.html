@@ -148,6 +148,7 @@
                 .catch(error => {
                     console.error('Error fetching data', error);
                 });
+                
             });
 
         </script>
@@ -171,7 +172,8 @@
                                         label : item.title,
                                         value : item.mal_id
                                    };
-                             }));
+                             }).slice(0,10)
+                            );
                          }
                       });
                      },
