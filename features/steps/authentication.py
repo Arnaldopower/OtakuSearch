@@ -14,13 +14,27 @@ def step_impl(context, username, password):
     context.browser.fill('password', password)
     context.browser.find_by_id('login').click()
 
+
+@given('I logout')
+def step_impl(context):
+    context.browser.find_by_id('prof').click()
+    context.browser.find_by_id('out').click()
+
+@given('I erase my account')
+def step_impl(context):
+    context.browser.find_by_id('prof').click()
+    context.browser.find_by_id('delete-account-button').click()
+    context.browser.find_by_id('del').click()
+
 @given('Im not logged in')
 def step_impl(context):
     context.browser.visit(context.get_url('/accounts/login'))
     
 @given('Im going to register but i remember my user and password')
 def step_imp(context):
-    
+    context.browser.visit(context.get_url('/accounts/login'))
+    context.browser.find_by_id('sign').click()
+    context.browser.find_by_id('logi').click()
 
 @given('I register as user "{username}" with password "{password}"')
 def step_impl(context, username, password):
@@ -33,3 +47,7 @@ def step_impl(context, username, password):
 @then('Im in home')
 def step_impl(context):
     assert context.browser.url.startswith(context.get_url(''))
+
+@then('Im back at login')
+def step_impl(context):
+    assert context.browser.url.startswith(context.get_url('/accounts/login'))
