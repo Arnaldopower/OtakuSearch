@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .models import Comment
+from .models import CommentAnime, RatingFromUser
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -27,7 +27,14 @@ class SignUpForm(UserCreationForm):
         for field in ['username', 'password1', 'password2']:
             self.fields[field].help_text = None
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = CommentAnime
         fields = ['body']
+
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = RatingFromUser
+        fields = ['rating']

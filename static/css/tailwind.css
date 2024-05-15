@@ -848,12 +848,12 @@ select {
   margin-bottom: 0.75rem;
 }
 
-.ml-\[50px\] {
-  margin-left: 50px;
+.ml-\[15px\] {
+  margin-left: 15px;
 }
 
-.mr-\[50px\] {
-  margin-right: 50px;
+.ml-\[50px\] {
+  margin-left: 50px;
 }
 
 .mr-\[7px\] {
@@ -916,16 +916,8 @@ select {
   height: 2.25rem;
 }
 
-.h-\[924\.7px\] {
-  height: 924.7px;
-}
-
 .h-screen {
   height: 100vh;
-}
-
-.min-h-\[924\.7px\] {
-  min-height: 924.7px;
 }
 
 .w-4 {
@@ -944,16 +936,8 @@ select {
   width: 2.25rem;
 }
 
-.w-\[225px\] {
-  width: 225px;
-}
-
 .w-full {
   width: 100%;
-}
-
-.min-w-\[225px\] {
-  min-width: 225px;
 }
 
 .max-w-\[75px\] {
@@ -1104,11 +1088,6 @@ select {
   background-color: rgb(244 239 254 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#fffff1\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 241 / var(--tw-bg-opacity));
-}
-
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -1134,11 +1113,6 @@ select {
 
 .fill-current {
   fill: currentColor;
-}
-
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .p-2 {
@@ -1216,6 +1190,11 @@ select {
 
 .font-kaushan {
   font-family: Kaushan Script, sans-serif;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-5xl {
@@ -1309,6 +1288,12 @@ select {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-transform {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1317,6 +1302,10 @@ select {
 
 .duration-100 {
   transition-duration: 100ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
 }
 
 .ease-in-out {
@@ -1375,6 +1364,16 @@ select {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:text-\[\#5f595c\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(95 89 92 / var(--tw-text-opacity));
+}
+
+.hover\:text-\[\#EE99CC\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(238 153 204 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-xl:hover {
