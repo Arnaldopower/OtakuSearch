@@ -64,6 +64,15 @@ class Migration(migrations.Migration):
                 ('animeID', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='web.anime')),
             ],
         ),
+        migrations.CreateModel(
+            name='Comment',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('body', models.TextField()),
+                ('anime', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='web.anime')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
         migrations.AddField(
             model_name='anime',
             name='genres',

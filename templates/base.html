@@ -17,6 +17,7 @@
     {% endblock %}
     {% tailwind_css %}
     <script src="{% static 'js/utils.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +28,17 @@
                 <p class="text-4xl page-name transition-colors duration-200 ease-in-out hover:text-[#5f595c]">OtakuSearch</p>
             </a>
             <div class="flex gap-4 items-center relative">
-                <input class="rounded-md p-2 text-md font-thin h-7 sm:block hidden" type="text" placeholder="Search...">
+                <form id="search-bar" class="flex items-center max-w-sm mx-auto">
+                    <fieldset class="relative w-full">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="absolute inset-y-0 start-0 flex items-center px-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-pink-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="text" id="simple-search" class="bg-white border border-pink-300 text-pink-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full px-10 py-2.5" placeholder="Search..." required/>
+                    </fieldset>
+                </form>
                 <a class="cursor-pointer" href="{% url 'profile' %}">
                     <div class="rounded-full bg-white h-9 w-9 text-black ring-2 ring-[#EE99CC] sm:block hidden">
                         <svg id="prof" heigth="37" width="37" viewBox="0 0 48 48"  fill="none"  class="text-black transition-colors duration-200 ease-in-out hover:text-[#EE99CC] fill-current"  xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +47,6 @@
                         </svg>
                     </div>
                 </a>
-
                 <div>
                     <svg id="hamburger-menu"
                          class="h-4 w-4 fill-current sm:hidden cursor-pointer"
@@ -115,6 +125,68 @@
                     hamburgerDropdown.classList.add('hidden');
                 }
             })
+        </script>
+        <script>
+            const searchBar = document.getElementById('search-bar');
+            const input = document.getElementById('simple-search');
+
+            searchBar.addEventListener('submit', () => {
+                event.preventDefault();
+                const query = input.value.trim();
+                const url = `https://api.jikan.moe/v4/anime?q=${query}`;
+                
+
+                fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error connecting");
+                    }
+                    return response.json();
+                })
+                .then (data => {
+                    console.log(data);
+                    const id = data["data"]['mal_id'];
+                    console.log(id);
+                })
+                .catch(error => {
+                    console.error('Error fetching data', error);
+                });
+                
+            });
+
+        </script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+        <script>
+            $(function(){
+                $("#simple-search").autocomplete({
+                    source :function( request, response ) {
+                      $.ajax({
+                         url: "https://api.jikan.moe/v4/anime",
+                         dataType: "json",
+                         data: {
+                            q: request.term
+                         },
+                         success: function( data ) {
+                             response($.map(data.data, function(item) {
+                                   return {
+                                        label : item.title,
+                                        value : item.mal_id
+                                   };
+                             }).slice(0,10)
+                            );
+                         }
+                      });
+                     },
+                        select: function (event, ui) {
+                           $("#simple-search").val(ui.item.label);
+                           console.log(ui)
+                           window.location = `/animes/${ui.item.value}`
+                        }
+                });
+});
         </script>
     {% endif %}
     {% block header %}
