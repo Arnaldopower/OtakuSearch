@@ -55,8 +55,6 @@ class EntryView(View):
             entry = Anime.objects.get(id=entry_id)
         else:
             entry = Manga.objects.get(id=entry_id)
-        if not request.user.is_authenticated:
-            return redirect('accounts/login')
         if request.method == "POST":
             if request.POST.get('deleteComment'):
                 delete_comment(request.POST.get('deleteComment'))
