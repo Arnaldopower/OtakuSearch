@@ -112,9 +112,9 @@ class CommentManagerAnime(models.Manager):
 
 
 class CommentManagerManga(models.Manager):
-    def by_anime(self, anime_id):
-        anime_comment = CommentAnime.objects.filter(anime_id=anime_id)
-        return anime_comment
+    def by_manga(self, manga_id):
+        return CommentManga.objects.filter(manga_id=manga_id)
+
 
 
 class CommentAnime(models.Model):
