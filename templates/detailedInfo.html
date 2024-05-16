@@ -37,6 +37,7 @@
         let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
 
         function getAnime(idAnime) {
+            console.log(idAnime)
             fetch('https://api.jikan.moe/v4/anime/' + idAnime)
                 .then(response => {
                     if (!response.ok) {
@@ -131,9 +132,12 @@
         function renderText(title, p) {
             p.innerText += title
         }
+        console.warn('{{entry_type}}')
         {% if entry_type == 'anime' %}
+            console.log('{{context.entry.id}}')
             getAnime('{{entry.id}}')
         {% else %}
+            console.log('{{entry.id}}')
             getManga('{{ entry.id }}')
         {% endif %}
         function editFunction(){

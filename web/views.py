@@ -4,6 +4,8 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from web.forms import CommentForm
 from web.models import Anime, Manga, CommentAnime, CommentManga
+from web.models import Anime, Status, Genre, Studio
+from core.utils import APIHandler
 
 
 class HomeView(View):
@@ -20,6 +22,46 @@ class HomeView(View):
             entry_list.update(Manga.objects.top())
             entry_list.update(Manga.objects.by_genre())
         return render(request, 'home.html', context={'entry_list': entry_list, 'type': req_type})
+
+class SearchView(View):
+    def get(self, request, anime_id):
+        anime = Anime.objects.get(id_anime=anime_id)
+        try:
+            anime = Anime.objects.get(id_anime=anime_id)
+        except:
+            handler = APIHandler()
+            res = handler.make_request(f"anime/{anime_id}/full")["data"]
+            if not Status.objects.filter(name=res['status']).exists():
+                status = Status(name=res['status'])
+                status.save()
+            else:
+                status = Status.objects.get(name=res['status'])
+                anime = Anime(id_anime=res['mal_id'], name=res['titles'][0]['title'], seasons=1,
+                              description=res['synopsis'],
+                              cover=res['images']['jpg']['image_url'], rating=res['score'], status=status)
+                if not Anime.objects.filter(id_anime=res['mal_id']).exists():
+                    anime.save()
+                else:
+                    anime = Anime.objects.get(id_anime=res['mal_id'])
+                for genre_json in res['genres']:
+                    if not Genre.objects.filter(genre=genre_json['name']).exists():
+                        genre = Genre(id=genre_json['mal_id'], genre=genre_json['name'])
+                        genre.save()
+                    else:
+                        genre = Genre.objects.get(genre=genre_json['name'])
+                    anime.genres.add(genre)
+                for studio_json in res['studios']:
+                    if not Studio.objects.filter(name=studio_json['name']).exists():
+                        studio = Studio(id=studio_json['mal_id'], name=studio_json['name'])
+                        studio.save()
+                    else:
+                        studio = Studio.objects.get(name=studio_json['name'])
+                    anime.studios.add(studio)
+        comments = get_comment(anime_id)
+        form = CommentForm()
+        return render(request, 'detailedInfo.html',
+                      context={'anime': anime, 'comments': comments, 'form': form, 'user': request.user})
+
 
 
 def get_comment(entry_id, entry_type):
@@ -52,15 +94,55 @@ class EntryView(View):
     def get(self, request, entry_type, entry_id):
         entry = None
         if entry_type == 'anime':
-            entry = Anime.objects.get(id=entry_id)
+            try:
+                entry = Anime.objects.get(id=entry_id)
+            except:
+                handler = APIHandler()
+                res = handler.make_request(f"anime/{entry_id}/full")["data"]
+                if not Status.objects.filter(name=res['status']).exists():
+                    status = Status(name=res['status'])
+                    status.save()
+                else:
+                    status = Status.objects.get(name=res['status'])
+                    entry = None
+                    entry = Anime(id=res['mal_id'], name=res['titles'][0]['title'], seasons=1,  
+                                      description=res['synopsis'],
+                                      cover=res['images']['jpg']['image_url'], rating=res['score'] if res['score'] is not None else 0, status=status)
+                    if not Anime.objects.filter(id=res['mal_id']).exists():
+                        entry.save()
+                    else:
+                        entry = Anime.objects.get(id=res['mal_id'])
         else:
-            entry = Manga.objects.get(id=entry_id)
-        comments = get_comment(entry_id,entry_type)
+            try:
+                entry = Manga.objects.get(id=entry_id)
+            except:
+                handler = APIHandler()
+                res = handler.make_request(f"manga/{entry_id}/full")["data"]
+                if not Status.objects.filter(name=res['status']).exists():
+                    status = Status(name=res['status'])
+                    status.save()
+                else:
+                    handler = APIHandler()
+                    res = handler.make_request(f"manga/{entry_id}/full")["data"]
+                    if not Status.objects.filter(name=res['status']).exists():
+                        status = Status(name=res['status'])
+                        status.save()
+                    else:
+                        status = Status.objects.get(name=res['status'])
+                        entry = None
+                        entry = Manga(id=res['mal_id'], name=res['titles'][0]['title'], seasons=1,  
+                                          description=res['synopsis'],
+                                          cover=res['images']['jpg']['image_url'], rating=res['score'] if res['score'] is not None else 0, status=status)
+                        if not Manga.objects.filter(id=res['mal_id']).exists():
+                            entry.save()
+                        else:
+                            entry = Manga.objects.get(id=res['mal_id'])
+        comments = get_comment(entry_id, entry_type)
         form = CommentForm()
-        form_edit_comment = CommentForm()
+        print(entry_type)
+        print(request.user)
         return render(request, 'detailedInfo.html',
-                      context={'entry': entry, 'entry_type': entry_type, 'comments': comments, 'form': form,
-                               'user': request.user, 'form_edit_comment': form_edit_comment})
+                      context={'anime': entry, 'comments': comments, 'form': form, 'user': request.user})
 
     def post(self, request, entry_type, entry_id):
         if entry_type == 'anime':
@@ -82,7 +164,7 @@ class EntryView(View):
                     else:
                         CommentManga.objects.create(manga=entry, author=request.user, body=form.cleaned_data['body'])
 
-        comments = get_comment(entry.id, entry_type)
+        comments = get_comment(entry_id, entry_type)
         form_edit_comment = CommentForm()
         form = CommentForm()
         return render(request, 'detailedInfo.html',
