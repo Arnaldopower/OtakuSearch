@@ -52,10 +52,10 @@ class EntryView(View):
     def get(self, request, entry_type, entry_id):
         entry = None
         if entry_type == 'anime':
-            entry = Anime.objects.get(id=entry_id)
+            entry = Anime.objects.get_by_id(entry_id)
         else:
-            entry = Manga.objects.get(id=entry_id)
-        comments = get_comment(entry_id,entry_type)
+            entry = Manga.objects.get_by_id(entry_id)
+        comments = get_comment(entry_id, entry_type)
         form = CommentForm()
         form_edit_comment = CommentForm()
         return render(request, 'detailedInfo.html',
@@ -78,7 +78,7 @@ class EntryView(View):
                 form = CommentForm(request.POST)
                 if form.is_valid():
                     if entry_type == 'anime':
-                        CommentAnime.objects.create(anime=entry,author=request.user, body=form.cleaned_data['body'])
+                        CommentAnime.objects.create(anime=entry, author=request.user, body=form.cleaned_data['body'])
                     else:
                         CommentManga.objects.create(manga=entry, author=request.user, body=form.cleaned_data['body'])
 
