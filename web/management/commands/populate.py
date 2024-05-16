@@ -3,7 +3,6 @@ from django.core.management.base import BaseCommand
 from core.utils import APIHandler
 from web.models import Anime, Status, Genre, Studio, Manga, Author
 
-
 class Command(BaseCommand):
     help = 'Populate DB using external API'
 

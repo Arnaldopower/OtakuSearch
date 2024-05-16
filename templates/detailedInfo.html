@@ -202,7 +202,7 @@
                             {% csrf_token %}
                         </form>
                         <button class="flex gap-2 items-center rounded-md bg-green-600 hover:bg-green-500 p-2 text-white"
-                                onclick="editFunction({{ comment.id }})">
+                                onclick="editFunction({{ comment.id }})" id="edit-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -217,11 +217,17 @@
                         <form id="edit_form" action="" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="modifyComment" value="{{ comment.id }}">
-                            <table>
-                                {{ form_edit_comment.as_table }}
-                            </table>
-                            <button class="flex gap-2 items-center rounded-md bg-red-600 hover:bg-red-500 p-2 text-white hover:cursor-pointer"
+                            {{ form_edit_comment }}
+                            <button class="mt-2 flex gap-2 items-center rounded-md bg-red-600 hover:bg-red-500 p-2 text-white hover:cursor-pointer"
                                     id="edit_submit" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="lucide lucide-send-horizontal">
+                                    <path d="m3 3 3 9-3 9 19-9Z"/>
+                                    <path d="M6 12h16"/>
+                                </svg>
                                 Submit edit
                             </button>
                         </form>
@@ -232,10 +238,16 @@
     {% endfor %}
 </div>
 <script>
-    const commentForm = document.getElementById('create')
-    const labels = commentForm.getElementsByTagName('label');
-    commentForm.getElementsByTagName('div')[0].classList.add('flex', 'flex-col')
-    for (let label of labels) {
-        label.classList.add('font-bold');
+    function styleForm(formId) {
+        const form = document.getElementById(formId);
+        form.getElementsByTagName('textarea')[0].id = formId === 'create' ? 'create-ta' : 'edit-ta';
+        const labels = form.getElementsByTagName('label');
+        form.getElementsByTagName('div')[0].classList.add('flex', 'flex-col')
+        for (let label of labels) {
+            label.classList.add('font-bold');
+        }
     }
+
+    styleForm('create')
+    styleForm('edit_form')
 </script>
