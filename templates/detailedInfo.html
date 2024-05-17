@@ -48,7 +48,7 @@
                 .then(data => {
                     console.log(data)
                     title = data["data"]['title']
-                    embedImg = data["data"]["images"]["jpg"]["image_url"]
+                    embedImg = idAnime==34443 ? "{% static 'imgs/baki.png' %}" : data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
                     score = data["data"]["score"] ? data["data"]["score"] : "N/A"
                     synopsis = data["data"]["synopsis"]
