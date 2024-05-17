@@ -45,25 +45,38 @@
                 <span class="w-full">Go to anime</span>
             </a> 
             <a class="cursor-pointer" href="{% url 'home' %}">
-                <p class="text-4xl page-name transition-colors duration-200 ease-in-out hover:text-[#5f595c]">OtakuSearch</p>
+                <p class="text-4xl page-name transition-colors duration-200 ease-in-out hover:text-[#5f595c]">
+                    OtakuSearch</p>
             </a>
             <div class="flex gap-4 items-center relative">
                 <form id="search-bar" class="flex items-center max-w-sm mx-auto">
                     <fieldset class="relative w-full">
                         <label for="simple-search" class="sr-only">Search</label>
                         <div class="absolute inset-y-0 start-0 flex items-center px-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-pink-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            <svg class="w-4 h-4 text-pink-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="text" id="simple-search" class="bg-white border border-pink-300 text-pink-900 text-sm rounded-lg hover:ring-pink-500 hover:border-pink-500 block w-full px-10 py-2.5" placeholder="Search..." required/>
+                        <input type="text" id="simple-search"
+                               class="bg-white border border-pink-300 text-pink-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full px-10 py-2.5"
+                               placeholder="Search..." required/>
                     </fieldset>
                 </form>
                 <a class="cursor-pointer" href="{% url 'profile' %}">
                     <div class="rounded-full bg-white h-9 w-9 text-black ring-2 ring-[#EE99CC] sm:block hidden">
-                        <svg id="prof" heigth="37" width="37" viewBox="0 0 48 48"  fill="none"  class="text-black transition-colors duration-200 ease-in-out hover:text-[#EE99CC] fill-current"  xmlns="http://www.w3.org/2000/svg">
-                            <path  fill-rule="evenodd"  clip-rule="evenodd"  d="M28.7556 27.84H19.244C16.4446 27.979 13.9643 29.689 12.8389 32.256C11.4815 34.921 14.1906 37.44 17.3413 37.44H30.6584C33.811 37.44 36.5201 34.921 35.1608 32.256C34.0354 29.689 31.5552 27.979 28.7556 27.84Z"  stroke="currentColor"  stroke-width="3.84"  stroke-linecap="round"  stroke-linejoin="round"/>
-                            <path  fill-rule="evenodd"  clip-rule="evenodd"  d="M29.7598 16.32C29.7598 19.5011 27.181 22.08 23.9998 22.08C20.8187 22.08 18.2399 19.5011 18.2399 16.32C18.2399 13.1388 20.8187 10.56 23.9998 10.56C25.5275 10.56 26.9927 11.1669 28.0729 12.2471C29.1531 13.3273 29.7598 14.7923 29.7598 16.32Z"  stroke="currentColor"  stroke-width="3.84"  stroke-linecap="round"  stroke-linejoin="round"/>
+                        <svg id="prof" heigth="37" width="37" viewBox="0 0 48 48" fill="none"
+                             class="text-black transition-colors duration-200 ease-in-out hover:text-[#EE99CC] fill-current"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M28.7556 27.84H19.244C16.4446 27.979 13.9643 29.689 12.8389 32.256C11.4815 34.921 14.1906 37.44 17.3413 37.44H30.6584C33.811 37.44 36.5201 34.921 35.1608 32.256C34.0354 29.689 31.5552 27.979 28.7556 27.84Z"
+                                  stroke="currentColor" stroke-width="3.84" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M29.7598 16.32C29.7598 19.5011 27.181 22.08 23.9998 22.08C20.8187 22.08 18.2399 19.5011 18.2399 16.32C18.2399 13.1388 20.8187 10.56 23.9998 10.56C25.5275 10.56 26.9927 11.1669 28.0729 12.2471C29.1531 13.3273 29.7598 14.7923 29.7598 16.32Z"
+                                  stroke="currentColor" stroke-width="3.84" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
                         </svg>
                     </div>
                 </a>
@@ -163,36 +176,37 @@
                 event.preventDefault();
                 const query = input.value.trim();
                 const url = `https://api.jikan.moe/v4/anime?q=${query}`;
-                
+
 
                 fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error connecting");
-                    }
-                    return response.json();
-                })
-                .then (data => {
-                    console.log(data);
-                    const id = data["data"]['mal_id'];
-                    console.log(id);
-                })
-                .catch(error => {
-                    console.error('Error fetching data', error);
-                });
-                
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Error connecting");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        const id = data["data"]['mal_id'];
+                        console.log(id);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data', error);
+                    });
+
             });
 
         </script>
-        
+
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
         <script>
-            $(function(){
+            $(function () {
                 $("#simple-search").autocomplete({
-                    source: function(request, response) {
+                    delay: 500,
+                    source: function (request, response) {
                         const urlAnime = "https://api.jikan.moe/v4/anime";
                         const urlManga = "https://api.jikan.moe/v4/manga";
                         const params = { q: request.term };
@@ -204,15 +218,15 @@
                             const data1 = responses[0].data;
                             const data2 = responses[1].data;
 
-                            const data1Results = $.map(data1, function(item) {
+                            const data1Results = $.map(data1, function (item) {
                                 return {
                                     label: item.title,
                                     value: item.mal_id,
                                     type: "anime"
                                 };
                             }).slice(0, 5);
-                    
-                            const data2Results = $.map(data2, function(item) {
+
+                            const data2Results = $.map(data2, function (item) {
                                 return {
                                     label: item.title,
                                     value: item.mal_id,
@@ -220,7 +234,7 @@
                                 };
                             }).slice(0, 5);
 
-                            const combinedResults = [...data1Results,...data2Results];
+                            const combinedResults = [...data1Results, ...data2Results];
                             response(combinedResults);
                         });
                     },
@@ -232,7 +246,7 @@
                     }
                 });
             });
-    </script>
+        </script>
     {% endif %}
     {% block header %}
     {% endblock %}

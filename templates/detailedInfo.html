@@ -5,181 +5,254 @@
     <link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
 </head>
 <body class="bg-[#f4effe]">
-    <div class="alignSearch ml-[15px]">
-            <div class="flex mt-2.5 alignSearch">
-                <div class="flex alignVideo">
-                    <div class="flex alignImage">
-                        <div class="mr-[7px]">
-                            <img class="imageAdjust" id="animeImage"></img>
-                        </div>
-                        <div class="descriptionAdjust">
-                            <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
-                            <div class="italic text-[1.2em]">
-                                <p id="animeRating"></p>
-                                <p id="animeStatus"></p>
-                                <p id="animeStudio"></p>
-                                <p id="animeSource"></p>
-                                <p id="animeGenre"></p>
-                                <p id="animeEpisodes"></p>
-                            </div>
-                        </div>
+<div class="alignSearch ml-[15px]">
+    <div class="flex mt-2.5 alignSearch">
+        <div class="flex alignVideo">
+            <div class="flex alignImage">
+                <div class="mr-[7px]">
+                    <img class="imageAdjust" id="animeImage"></img>
+                </div>
+                <div class="descriptionAdjust">
+                    <p class="bg-[#ecb7d0] max-w-[75px] text-[35px] rounded-[10px] font-kaushan" id="animeScore"></p>
+                    <div class="italic text-[1.2em]">
+                        <p id="animeRating"></p>
+                        <p id="animeStatus"></p>
+                        <p id="animeStudio"></p>
+                        <p id="animeSource"></p>
+                        <p id="animeGenre"></p>
+                        <p id="animeEpisodes"></p>
                     </div>
                 </div>
-                <iframe id="animeVideo" class="responsiveVideo ml-[50px]" width="420" height="315"></iframe>
             </div>
-
-            <h1 id="animeTitle" class="font-kaushan text-[35px]"></h1>
-            <p id="animeSynopsis" class="italic text-[1.2em]"></p>
         </div>
+        <iframe id="animeVideo" class="responsiveVideo ml-[50px]" width="420" height="315"></iframe>
     </div>
 
-    <script>
-        let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
+    <h1 id="animeTitle" class="font-kaushan text-[35px]"></h1>
+    <p id="animeSynopsis" class="italic text-[1.2em]"></p>
+</div>
+</div>
 
-        function getAnime(idAnime) {
-            console.log(idAnime)
-            fetch('https://api.jikan.moe/v4/anime/' + idAnime)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error connecting")
-                    }
-                    return response.json()
-                })
-                .then(data => {
-                    console.log(data)
-                    title = data["data"]['title']
-                    embedImg = idAnime==34443 ? "{% static 'imgs/baki.png' %}" : data["data"]["images"]["jpg"]["image_url"]
-                    embedUrl = data["data"]["trailer"]["embed_url"]
-                    score = data["data"]["score"] ? data["data"]["score"] : "N/A"
-                    synopsis = data["data"]["synopsis"]
-                    rating = data["data"]["rating"]
-                    status = data["data"]["status"]
-                    studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
-                    source = data["data"]["source"]
-                    genres = data["data"]["genres"]
-                    episodes = data["data"]["episodes"] ? data["data"]["episodes"] : "Not determinied"
+<script>
+    let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
 
-                    renderText(title, document.getElementById('animeTitle'))
-                    renderImage(embedImg, document.getElementById('animeImage'))
-                    renderVideo(embedUrl, document.getElementById('animeVideo'))
-                    renderText(score, document.getElementById('animeScore'))
-                    renderText(synopsis, document.getElementById('animeSynopsis'))
-                    renderText("Rating: " + rating, document.getElementById('animeRating'))
-                    renderText("Status: " + status, document.getElementById('animeStatus'))
-                    renderText("Studio: " + studio, document.getElementById('animeStudio'))
-                    renderText("Source: " + source, document.getElementById('animeSource'))
-                    renderText("Episodes: " + episodes, document.getElementById('animeEpisodes'))
-                    genres.forEach(element => {
-                        renderText(element["name"] + "-", document.getElementById('animeGenre'))
-                    });
-                })
-                .catch(error => (console.log("Error obtaining elements", error)))
+    function getAnime(idAnime) {
+        console.log(idAnime)
+        fetch('https://api.jikan.moe/v4/anime/' + idAnime)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error connecting")
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                title = data["data"]['title']
+                embedImg = idAnime == 34443 ? "{% static 'imgs/baki.png' %}" : data["data"]["images"]["jpg"]["image_url"]
+                embedUrl = data["data"]["trailer"]["embed_url"]
+                score = data["data"]["score"] ? data["data"]["score"] : "N/A"
+                synopsis = data["data"]["synopsis"] ? data["data"]["synopsis"] : "No description."
+                rating = data["data"]["rating"]
+                status = data["data"]["status"]
+                studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
+                source = data["data"]["source"]
+                genres = data["data"]["genres"]
+                episodes = data["data"]["episodes"] ? data["data"]["episodes"] : "Not determinied"
+
+                renderText(title, document.getElementById('animeTitle'))
+                renderImage(embedImg, document.getElementById('animeImage'))
+                renderVideo(embedUrl, document.getElementById('animeVideo'))
+                renderText(score, document.getElementById('animeScore'))
+                renderText(synopsis, document.getElementById('animeSynopsis'))
+                renderText("Rating: " + rating, document.getElementById('animeRating'))
+                renderText("Status: " + status, document.getElementById('animeStatus'))
+                renderText("Studio: " + studio, document.getElementById('animeStudio'))
+                renderText("Source: " + source, document.getElementById('animeSource'))
+                renderText("Episodes: " + episodes, document.getElementById('animeEpisodes'))
+                genres.forEach(element => {
+                    renderText(element["name"] + "-", document.getElementById('animeGenre'))
+                });
+            })
+            .catch(error => (console.log("Error obtaining elements", error)))
+    }
+
+    function getManga(idManga) {
+        fetch('https://api.jikan.moe/v4/manga/' + idManga)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error connecting")
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+
+                title = data["data"]['title']
+                embedImg = data["data"]["images"]["jpg"]["image_url"]
+                embedUrl = null
+                score = data["data"]["score"] ? data["data"]["score"] : "N/A"
+                synopsis = data["data"]["synopsis"] ? data["data"]["synopsis"] : "No description."
+                rating = data["data"]["authors"]
+                status = data["data"]["status"]
+                studio = data["data"]["serializations"].length ? data["data"]["serializations"][0]["name"] : "No serialization for now"
+                source = data["data"]["chapters"]
+                genres = data["data"]["genres"]
+
+
+                renderText(title, document.getElementById('animeTitle'))
+                renderImage(embedImg, document.getElementById('animeImage'))
+                renderVideo(embedUrl, document.getElementById('animeVideo'))
+                renderText(score, document.getElementById('animeScore'))
+                renderText(synopsis, document.getElementById('animeSynopsis'))
+                rating.forEach(element => {
+                    renderText(element["name"] + "-", document.getElementById('animeRating'))
+                });
+                renderText("Status: " + status, document.getElementById('animeStatus'))
+                renderText("Serialization: " + studio, document.getElementById('animeStudio'))
+                renderText("Chapters: " + source, document.getElementById('animeSource'))
+                genres.forEach(element => {
+                    renderText(element["name"] + "-", document.getElementById('animeGenre'))
+                });
+            })
+            .catch(error => (console.log("Error obtaining elements", error)))
+    }
+
+    function renderVideo(embedUrl, iframe) {
+        if (embedUrl) {
+            iframe.src = embedUrl + '?autoplay=0';
+        } else {
+            iframe.style.display = "none"
         }
+    }
 
-        function getManga(idManga) {
-            fetch('https://api.jikan.moe/v4/manga/' + idManga)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error connecting")
-                    }
-                    return response.json()
-                })
-                .then(data => {
-                    console.log(data)
+    function renderImage(embedImg, img) {
+        img.src = embedImg
+    }
 
-                    title = data["data"]['title']
-                    embedImg = data["data"]["images"]["jpg"]["image_url"]
-                    embedUrl = null
-                    score = data["data"]["score"] ? data["data"]["score"] : "N/A"
-                    synopsis = data["data"]["synopsis"]
-                    rating = data["data"]["authors"]
-                    status = data["data"]["status"]
-                    studio = data["data"]["serializations"].length ? data["data"]["serializations"][0]["name"] : "No serialization for now"
-                    source = data["data"]["chapters"]
-                    genres = data["data"]["genres"]
+    function renderText(title, p) {
+        p.innerText += title
+    }
 
-
-                    renderText(title, document.getElementById('animeTitle'))
-                    renderImage(embedImg, document.getElementById('animeImage'))
-                    renderVideo(embedUrl, document.getElementById('animeVideo'))
-                    renderText(score, document.getElementById('animeScore'))
-                    renderText(synopsis, document.getElementById('animeSynopsis'))
-                    rating.forEach(element => {
-                        renderText(element["name"] + "-", document.getElementById('animeRating'))
-                    });
-                    renderText("Status: " + status, document.getElementById('animeStatus'))
-                    renderText("Serialization: " + studio, document.getElementById('animeStudio'))
-                    renderText("Chapters: " + source, document.getElementById('animeSource'))
-                    genres.forEach(element => {
-                        renderText(element["name"] + "-", document.getElementById('animeGenre'))
-                    });
-                })
-                .catch(error => (console.log("Error obtaining elements", error)))
-        }
-
-        function renderVideo(embedUrl, iframe) {
-            if (embedUrl) {
-                iframe.src = embedUrl + '?autoplay=0';
-            } else {
-                iframe.style.display = "none"
-            }
-        }
-
-        function renderImage(embedImg, img) {
-            img.src = embedImg
-        }
-
-        function renderText(title, p) {
-            p.innerText += title
-        }
-        console.warn('{{entry_type  }}')
-        {% if entry_type == 'anime' %}
-            console.log('{{context.entry.id}}')
-            getAnime('{{entry.id}}')
-        {% else %}
-            console.log('{{entry.id}}')
-            getManga('{{ entry.id }}')
-        {% endif %}
-        function editFunction(){
-            let formEdit = document.getElementById({{ comment_id }})
-            if (formEdit.style.display === "none") {
-                formEdit.style.display = "block";
-                } else {
-                    formEdit.style.display = "none";
-            }
-
-        }
-        getAnime('{{anime.id_anime}}')
-    </script>
-</body>
-
-<form id="create" action="" method="post">
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    <input id="submit_comment" type="submit" value="Submit">
-</form>
-{% for comment in comments %}
-    <h4>
-        {{ comment }}
-    </h4>
-    {% if comment.author == user %}
-        <form id="delete" action="" method="post">
-            <input type="hidden" name="deleteComment" value="{{ comment.id }}">
-            <button id="delete_comment" type="submit">Delete</button>
-            {% csrf_token %}
-        </form>
-        <button onclick="editFunction()">edit</button>
-            <div id="{{comment_id}}">
-                <form id="edit_form" action="" method="post">
-                    <input type="hidden" name="modifyComment" value="{{ comment.id }}">
-                    <table>
-                        {{form_edit_comment.as_table}}
-                    </table>
-                    <input id="edit_submit" type="submit" value="Submit edit">
-                    {% csrf_token %}
-                </form>
-            </div>
+    console.warn('{{entry_type  }}')
+    {% if entry_type == 'anime' %}
+        console.log('{{context.entry.id}}')
+        getAnime('{{entry.id}}')
+    {% else %}
+        console.log('{{entry.id}}')
+        getManga('{{ entry.id }}')
     {% endif %}
-{% endfor %}
+    function editFunction(comment_id) {
+        console.log(comment_id)
+        let formEdit = document.getElementById(comment_id)
+        if (formEdit.classList.contains('hidden')) {
+            formEdit.classList.remove('hidden')
+        } else
+            formEdit.classList.add('hidden')
+    }
+</script>
+<div class="flex justify-center flex-col p-2 gap-2">
+    <form class="flex flex-col gap-2" id="create" action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="flex gap-2 items-center rounded-md bg-green-600 hover:bg-green-500 p-2 text-white"
+                id="submit_comment" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="lucide lucide-send-horizontal">
+                <path d="m3 3 3 9-3 9 19-9Z"/>
+                <path d="M6 12h16"/>
+            </svg>
+            Submit
+        </button>
+    </form>
+    {% for comment in comments %}
+        <div class="font-bold flex flex-col gap-2 ring-2 rounded-md ring-[#ecb7d0] p-2">
+            <div class="flex gap-2 items-center">
+                <div class="ring-2 ring-slate-800 rounded-full h-8 w-8 flex">
+                    <svg id="prof" heigth="37" width="37" viewBox="0 0 48 48" fill="none"
+                         class="object-fit text-black transition-colors duration-200 ease-in-out hover:text-[#EE99CC] fill-current"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M28.7556 27.84H19.244C16.4446 27.979 13.9643 29.689 12.8389 32.256C11.4815 34.921 14.1906 37.44 17.3413 37.44H30.6584C33.811 37.44 36.5201 34.921 35.1608 32.256C34.0354 29.689 31.5552 27.979 28.7556 27.84Z"
+                              stroke="currentColor" stroke-width="3.84" stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M29.7598 16.32C29.7598 19.5011 27.181 22.08 23.9998 22.08C20.8187 22.08 18.2399 19.5011 18.2399 16.32C18.2399 13.1388 20.8187 10.56 23.9998 10.56C25.5275 10.56 26.9927 11.1669 28.0729 12.2471C29.1531 13.3273 29.7598 14.7923 29.7598 16.32Z"
+                              stroke="currentColor" stroke-width="3.84" stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+                {{ comment.author }}</div>
+            <div class="ring-2 ring-slate-800 rounded-md p-2">{{ comment.body }}</div>
+            <div class="flex flex-col gap-2">
+                {% if comment.author == user %}
+                    <div class="flex gap-2">
+                        <form id="delete" action="" method="post">
+                            <input type="hidden" name="deleteComment" value="{{ comment.id }}">
+                            <button class="flex gap-2 items-center rounded-md bg-red-600 hover:bg-red-500 p-2 text-white"
+                                    id="delete_comment"
+                                    type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="lucide lucide-trash-2">
+                                    <path d="M3 6h18"/>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                    <line x1="10" x2="10" y1="11" y2="17"/>
+                                    <line x1="14" x2="14" y1="11" y2="17"/>
+                                </svg>
+                                Delete
+                            </button>
+                            {% csrf_token %}
+                        </form>
+                        <button class="flex gap-2 items-center rounded-md bg-green-600 hover:bg-green-500 p-2 text-white"
+                                onclick="editFunction({{ comment.id }})" id="edit-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="lucide lucide-pencil">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                                <path d="m15 5 4 4"/>
+                            </svg>
+                            Edit
+                        </button>
+                    </div>
+                    <div id="{{ comment.id }}" class="hidden">
+                        <form id="edit_form" action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="modifyComment" value="{{ comment.id }}">
+                            {{ form_edit_comment }}
+                            <button class="mt-2 flex gap-2 items-center rounded-md bg-red-600 hover:bg-red-500 p-2 text-white hover:cursor-pointer"
+                                    id="edit_submit" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="lucide lucide-send-horizontal">
+                                    <path d="m3 3 3 9-3 9 19-9Z"/>
+                                    <path d="M6 12h16"/>
+                                </svg>
+                                Submit edit
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<script>
+    function styleForm(formId) {
+        const form = document.getElementById(formId);
+        form.getElementsByTagName('textarea')[0].id = formId === 'create' ? 'create-ta' : 'edit-ta';
+        const labels = form.getElementsByTagName('label');
+        form.getElementsByTagName('div')[0].classList.add('flex', 'flex-col')
+        for (let label of labels) {
+            label.classList.add('font-bold');
+        }
+    }
+
+    styleForm('create')
+    styleForm('edit_form')
+</script>
+</body>
