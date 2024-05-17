@@ -924,6 +924,18 @@ select {
   height: 100vh;
 }
 
+.h-\[15px\] {
+  height: 15px;
+}
+
+.h-\[8px\] {
+  height: 8px;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
 .w-4 {
   width: 1rem;
 }
@@ -944,12 +956,24 @@ select {
   width: 100%;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.min-w-full {
+  min-width: 100%;
+}
+
 .max-w-\[75px\] {
   max-width: 75px;
 }
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.border-collapse {
+  border-collapse: collapse;
 }
 
 .-translate-y-1\/2 {
@@ -1101,11 +1125,6 @@ select {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-gray-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-
 .bg-slate-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
@@ -1114,6 +1133,11 @@ select {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
@@ -1223,11 +1247,6 @@ select {
   font-size: 35px;
 }
 
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1238,16 +1257,21 @@ select {
   line-height: 1.75rem;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
 
-.font-medium {
-  font-weight: 500;
-}
-
 .font-semibold {
   font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .italic {
@@ -1274,11 +1298,6 @@ select {
   color: rgb(244 114 182 / var(--tw-text-opacity));
 }
 
-.text-pink-600 {
-  --tw-text-opacity: 1;
-  color: rgb(219 39 119 / var(--tw-text-opacity));
-}
-
 .text-pink-900 {
   --tw-text-opacity: 1;
   color: rgb(131 24 67 / var(--tw-text-opacity));
@@ -1292,6 +1311,11 @@ select {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-pink-600 {
+  --tw-text-opacity: 1;
+  color: rgb(219 39 119 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
@@ -1425,6 +1449,16 @@ select {
 }
 
 .hover\:ring-pink-500:hover {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(236 72 153 / var(--tw-ring-opacity));
+}
+
+.focus\:border-pink-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(236 72 153 / var(--tw-border-opacity));
+}
+
+.focus\:ring-pink-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(236 72 153 / var(--tw-ring-opacity));
 }
