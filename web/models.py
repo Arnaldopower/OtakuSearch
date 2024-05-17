@@ -64,8 +64,9 @@ class AnimeManager(models.Manager):
             status.save()
         else:
             status = Status.objects.get(name=data['status'])
+        description = data['synopsis'] if data['synopsis'] is not None else "No description."
         entry = Anime(id=data['mal_id'], name=data['titles'][0]['title'], seasons=1,
-                      description=data['synopsis'],
+                      description=description,
                       cover=data['images']['jpg']['image_url'], rating=data['score'], status=status)
         if not Anime.objects.filter(id=data['mal_id']).exists():
             entry.save()

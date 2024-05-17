@@ -51,7 +51,7 @@
                     embedImg = idAnime==34443 ? "{% static 'imgs/baki.png' %}" : data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = data["data"]["trailer"]["embed_url"]
                     score = data["data"]["score"] ? data["data"]["score"] : "N/A"
-                    synopsis = data["data"]["synopsis"]
+                    synopsis = data["data"]["synopsis"] ? data["data"]["synopsis"] : "No description."
                     rating = data["data"]["rating"]
                     status = data["data"]["status"]
                     studio = data["data"]["studios"].length ? data["data"]["studios"][0]["name"] : "No studio working on it for now"
@@ -91,7 +91,7 @@
                     embedImg = data["data"]["images"]["jpg"]["image_url"]
                     embedUrl = null
                     score = data["data"]["score"] ? data["data"]["score"] : "N/A"
-                    synopsis = data["data"]["synopsis"]
+                    synopsis = data["data"]["synopsis"] ? data["data"]["synopsis"] : "No description."
                     rating = data["data"]["authors"]
                     status = data["data"]["status"]
                     studio = data["data"]["serializations"].length ? data["data"]["serializations"][0]["name"] : "No serialization for now"
@@ -152,7 +152,8 @@
         getAnime('{{anime.id_anime}}')
     </script>
 </body>
-
+<br>
+<h1 class="text-xl">Comments:</h1>
 <form id="create" action="" method="post">
     {% csrf_token %}
     <table>
