@@ -167,7 +167,7 @@
                         const urlAnime = "https://api.jikan.moe/v4/anime";
                         const urlManga = "https://api.jikan.moe/v4/manga";
                         const params = { q: request.term };
-                        
+
                         const promise1 = $.ajax({ url: urlAnime, data: params, dataType: "json" });
                         const promise2 = $.ajax({ url: urlManga, data: params, dataType: "json" });
                         
@@ -195,6 +195,7 @@
                             response(combinedResults);
                         });
                     },
+                    delay:300,
                     select: function(event, ui) {
                         $("#simple-search").val(ui.item.label);
                         console.log(ui);
