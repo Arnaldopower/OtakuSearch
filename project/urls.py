@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path, include
 
 from web.views import HomeView, EntryView, ProfileView, CommentView
@@ -26,5 +27,4 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("entry/<str:entry_type>/<int:entry_id>/", EntryView.as_view(), name="entry"),
     path("profile/", ProfileView.as_view(), name="profile"),
-
 ]

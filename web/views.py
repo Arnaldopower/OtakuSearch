@@ -94,49 +94,9 @@ class EntryView(View):
     def get(self, request, entry_type, entry_id):
         entry = None
         if entry_type == 'anime':
-            try:
-                entry = Anime.objects.get(id=entry_id)
-            except:
-                handler = APIHandler()
-                res = handler.make_request(f"anime/{entry_id}/full")["data"]
-                if not Status.objects.filter(name=res['status']).exists():
-                    status = Status(name=res['status'])
-                    status.save()
-                else:
-                    status = Status.objects.get(name=res['status'])
-                    entry = None
-                    entry = Anime(id=res['mal_id'], name=res['titles'][0]['title'], seasons=1,  
-                                      description=res['synopsis'],
-                                      cover=res['images']['jpg']['image_url'], rating=res['score'] if res['score'] is not None else 0, status=status)
-                    if not Anime.objects.filter(id=res['mal_id']).exists():
-                        entry.save()
-                    else:
-                        entry = Anime.objects.get(id=res['mal_id'])
+            entry = Anime.objects.get_by_id(entry_id)
         else:
-            try:
-                entry = Manga.objects.get(id=entry_id)
-            except:
-                handler = APIHandler()
-                res = handler.make_request(f"manga/{entry_id}/full")["data"]
-                if not Status.objects.filter(name=res['status']).exists():
-                    status = Status(name=res['status'])
-                    status.save()
-                else:
-                    handler = APIHandler()
-                    res = handler.make_request(f"manga/{entry_id}/full")["data"]
-                    if not Status.objects.filter(name=res['status']).exists():
-                        status = Status(name=res['status'])
-                        status.save()
-                    else:
-                        status = Status.objects.get(name=res['status'])
-                        entry = None
-                        entry = Manga(id=res['mal_id'], name=res['titles'][0]['title'], seasons=1,  
-                                          description=res['synopsis'],
-                                          cover=res['images']['jpg']['image_url'], rating=res['score'] if res['score'] is not None else 0, status=status)
-                        if not Manga.objects.filter(id=res['mal_id']).exists():
-                            entry.save()
-                        else:
-                            entry = Manga.objects.get(id=res['mal_id'])
+            entry = Manga.objects.get_by_id(entry_id)
         comments = get_comment(entry_id, entry_type)
         form = CommentForm()
         print(entry_type)
@@ -160,7 +120,7 @@ class EntryView(View):
                 form = CommentForm(request.POST)
                 if form.is_valid():
                     if entry_type == 'anime':
-                        CommentAnime.objects.create(anime=entry,author=request.user, body=form.cleaned_data['body'])
+                        CommentAnime.objects.create(anime=entry, author=request.user, body=form.cleaned_data['body'])
                     else:
                         CommentManga.objects.create(manga=entry, author=request.user, body=form.cleaned_data['body'])
 
