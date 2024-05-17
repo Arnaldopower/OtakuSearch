@@ -137,7 +137,7 @@ class MangaManager(models.Manager):
             status = Status.objects.get(name=data['status'])
         volumes = data['volumes'] if data['volumes'] is not None else 0
         chapters = data['chapters'] if data['chapters'] is not None else 0
-        description = data['synopsis'] if data['synopsis'] is not None else ""
+        description = data['synopsis'] if data['synopsis'] is not None else "No description."
         entry = Manga(id=data['mal_id'], name=data['titles'][0]['title'], volumes=volumes,
                       chapters=chapters, description=description,
                       cover=data['images']['jpg']['image_url'], rating=data['score'], status=status)
