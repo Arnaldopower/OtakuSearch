@@ -27,4 +27,8 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("entry/<str:entry_type>/<int:entry_id>/", EntryView.as_view(), name="entry"),
     path("profile/", ProfileView.as_view(), name="profile"),
+    path("?type=manga/",  HomeView.as_view(), name="home_manga"),
+    path("?type=anime/",  HomeView.as_view(), name="home_anime"),
+
+
 ]

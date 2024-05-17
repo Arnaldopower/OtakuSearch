@@ -24,7 +24,7 @@
 <header>
     {% if include_header %}
         <div class="bg-[#EAD1DC] p-2 flex justify-between w-full items-center">
-            <a id="manga-button" href="#" class="inline-flex items-center justify-center p-2 text-base font-medium text-pink-600 
+            <a id="manga-button" href="{% url 'home_manga' %}" class="inline-flex items-center justify-center p-2 text-base font-medium text-pink-600 
             rounded-lg bg-gray-50 hover:text-pink-900 hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -34,7 +34,7 @@
                         </svg>
                 <span class="w-full">Go to manga</span>
             </a> 
-            <a id="anime-button" href="#" class="inline-flex items-center justify-center p-2 text-base font-medium text-pink-600 
+            <a id="anime-button" href="{% url 'home_anime' %}" class="inline-flex items-center justify-center p-2 text-base font-medium text-pink-600 
             rounded-lg bg-gray-50 hover:text-pink-900 hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video">
                 <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/>
@@ -122,6 +122,8 @@
         </div>
         <script>
             const mangaButton = document.getElementById('manga-button');
+            const animeButton = document.getElementById('anime-button');
+            mangaButton.style.display = 'none/block';
         </script>
         <script>
             const hamburgerMenu = document.getElementById("hamburger-menu");
