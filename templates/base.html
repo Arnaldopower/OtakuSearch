@@ -163,32 +163,46 @@
         <script>
             $(function(){
                 $("#simple-search").autocomplete({
-                    source :function( request, response ) {
-                      $.ajax({
-                         url: "https://api.jikan.moe/v4/anime",
-                         dataType: "json",
-                         data: {
-                            q: request.term
-                         },
-                         success: function( data ) {
-                             response($.map(data.data, function(item) {
-                                   return {
-                                        label : item.title,
-                                        value : item.mal_id
-                                   };
-                             }).slice(0,10)
-                            );
-                         }
-                      });
-                     },
-                        select: function (event, ui) {
-                           $("#simple-search").val(ui.item.label);
-                           console.log(ui)
-                           window.location = `/entry/anime/${ui.item.value}/`
-                        }
+                    source: function(request, response) {
+                        const urlAnime = "https://api.jikan.moe/v4/anime";
+                        const urlManga = "https://api.jikan.moe/v4/manga";
+                        const params = { q: request.term };
+                        
+                        const promise1 = $.ajax({ url: urlAnime, data: params, dataType: "json" });
+                        const promise2 = $.ajax({ url: urlManga, data: params, dataType: "json" });
+                        
+                        Promise.all([promise1, promise2]).then(responses => {
+                            const data1 = responses[0].data;
+                            const data2 = responses[1].data;
+
+                            const data1Results = $.map(data1, function(item) {
+                                return {
+                                    label: item.title,
+                                    value: item.mal_id,
+                                    type: "anime"
+                                };
+                            }).slice(0, 5);
+                    
+                            const data2Results = $.map(data2, function(item) {
+                                return {
+                                    label: item.title,
+                                    value: item.mal_id,
+                                    type: "manga"
+                                };
+                            }).slice(0, 5);
+
+                            const combinedResults = [...data1Results,...data2Results];
+                            response(combinedResults);
+                        });
+                    },
+                    select: function(event, ui) {
+                        $("#simple-search").val(ui.item.label);
+                        console.log(ui);
+                        window.location = `/entry/${ui.item.type}/${ui.item.value}/`;
+                    }
                 });
-});
-        </script>
+            });
+    </script>
     {% endif %}
     {% block header %}
     {% endblock %}
