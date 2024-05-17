@@ -37,10 +37,10 @@
                         <div class="sign-up">
                             {% if sign_up %}
                                 <span>Already have an account?</span>
-                                <a id="logi" href="{% url 'login' %}">Sign in!</a>
+                                <a id="logi" href="{% url 'login' %}" class="underline text-blue-500">Sign in!</a>
                             {% else %}
                                 <span>Don't have an account yet?</span>
-                                <a id="sign" href="{% url 'signup' %}">Sign up!</a>
+                                <a id="sign" href="{% url 'signup' %}" class="underline text-blue-500">Sign up!</a>
                             {% endif %}
                         </div>
                     </div>
