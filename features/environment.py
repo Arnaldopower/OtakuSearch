@@ -6,7 +6,7 @@ def before_all(context):
     context.browser = Browser('edge', headless=False)
 
 
-def before_scenario(context, scenario):
+def before_feature(context, scenario):
     call_command('populate')
 
 
