@@ -1,9 +1,15 @@
+{% extends "base.html" %}
 {% load static %}
-{% include "base.html" with include_header=True %}
-<!DOCTYPE html>
-<head>
-    <link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
-</head>
+{% block title %}
+{{entry.name}} - {{entry_type}}
+{%endblock%}
+{% block include_header%}
+True
+{%endblock%}
+{%block content%}
+
+{% include "header.html" %}
+<link rel="stylesheet" href="{% static 'css/responsiveInfo.css' %}">
 <body class="bg-[#f4effe]">
 <div class="alignSearch ml-[15px]">
     <div class="flex mt-2.5 alignSearch">
@@ -36,7 +42,7 @@
 <script>
     let embedUrl, embedImg, title, score, synopsis, rating, status, studio, source, genres
 
-    function getAnime(idAnime) {
+    function getAnime(idAnime) { 
         console.log(idAnime)
         fetch('https://api.jikan.moe/v4/anime/' + idAnime)
             .then(response => {
@@ -133,7 +139,6 @@
         p.innerText += title
     }
 
-    console.warn('{{entry_type  }}')
     {% if entry_type == 'anime' %}
         console.log('{{context.entry.id}}')
         getAnime('{{entry.id}}')
@@ -256,3 +261,4 @@
     styleForm('edit_form')
 </script>
 </body>
+{%endblock content%}
