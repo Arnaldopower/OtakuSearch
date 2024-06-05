@@ -35,12 +35,12 @@ class APIHandler(metaclass=SingletonMeta):
                 break
             time_sleep = 0
             if len(self._requests_per_second) >= self._MAX_REQ_PER_SECOND:
-                time_sleep = 1 - (time.time() - self._requests_per_second[0])
+                time_sleep = 1 - (time.time() - self._requests_per_minute[0])
             elif len(self._requests_per_minute) >= self._MAX_REQ_PER_MINUTE:
                 time_sleep = 60 - (time.time() - self._requests_per_minute[0])
             if time_sleep > 0:
-                print(f'Waiting {math.ceil(time_sleep)} seconds before next request')
-                time.sleep(math.ceil(time_sleep))
+                print(f'Waiting {time_sleep} seconds before next request')
+                time.sleep(time_sleep)
 
     def make_request(self, endpoint, params=None):
         self._wait()
@@ -49,7 +49,7 @@ class APIHandler(metaclass=SingletonMeta):
         self._requests_per_minute.append(current_time)
         url = f"{self._BASE_URL}/{endpoint}"
         retries = 1
-        while retries <= 3:
+        while retries <= 10:
             try:
                 response = requests.get(url, params=params)
                 response.raise_for_status()
@@ -57,5 +57,7 @@ class APIHandler(metaclass=SingletonMeta):
             except requests.exceptions.RequestException as e:
                 print(f"Error fetching data from Jikan API: {e}")
                 print(f'Retry {retries}...')
+                print('Waiting 1 second before next retry...')
+                time.sleep(1)
                 retries += 1
         return None
