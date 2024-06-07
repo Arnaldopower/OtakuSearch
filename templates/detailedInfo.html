@@ -172,6 +172,8 @@ True
         </button>
     </form>
     {% for comment in comments %}
+        <span vocab="https://schema.org/" typeof="CreativeWork">
+            <span property="discusses" id="animeTitle"></span>
         <div class="font-bold flex flex-col gap-2 ring-2 rounded-md ring-[#ecb7d0] p-2">
             <div class="flex gap-2 items-center">
                 <div class="ring-2 ring-slate-800 rounded-full h-8 w-8 flex">
@@ -188,8 +190,8 @@ True
                               stroke-linejoin="round"></path>
                     </svg>
                 </div>
-                {{ comment.author }}</div>
-            <div class="ring-2 ring-slate-800 rounded-md p-2">{{ comment.body }}</div>
+                 <span property="creator">{{ comment.author }} </span></div>
+            <div class="ring-2 ring-slate-800 rounded-md p-2"><span property="commentText"> {{ comment.body }}</span></div>
             <div class="flex flex-col gap-2">
                 {% if comment.author == user %}
                     <div class="flex gap-2">
@@ -245,6 +247,7 @@ True
                 {% endif %}
             </div>
         </div>
+        </span>
     {% endfor %}
 </div>
 <script>
